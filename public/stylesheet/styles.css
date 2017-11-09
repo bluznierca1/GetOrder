@@ -1,3 +1,119 @@
-h1 {
-	color: red;
+	body {
+		background-color: #fff;
+	}
+
+	/*header section*/
+#header {
+	width: 100%;
+	height: auto;
 }
+
+.parallax-container {
+		height: 90vh;
+	}
+
+	/*adjusting logo for screen sizes*/
+	@media screen and ( max-width: 480px ){
+		.logo {
+			height: 70px;
+	    width: 150px;
+	    opacity: .9;
+	    padding-top: .5em;
+		}
+	}
+
+	@media screen and ( min-width: 481px ){
+		.logo {
+			height: 80px;
+			width: 200px;
+	    opacity: .9;
+	    padding-top: .5em;
+		}
+	}
+
+	/*adjusting menu button for screen sizes */
+	
+	#menu {
+		opacity: .9;
+		background-color: white;
+		font-size: 2.3em;
+		color: black;
+		cursor: pointer;
+	}
+	
+	@media screen and ( max-width: 481px){
+		#menu {
+			margin-top: .5em;
+		}
+	}
+	@media screen and (min-width: 482px) {
+		#menu {
+			margin-top: .5em;
+			margin-right: 2em;
+		}
+	}
+
+	/*menu*/
+	@media screen and (max-width: 480px){
+		.side-menu {
+			max-width: 60%;
+		}
+	}
+
+	.menu-user-info {
+		font-size: 1.2em;
+		font-weight: bold;
+		color: white;
+		padding: 0 .5em;
+		text-shadow: 2px 2px black;
+		opacity: .8;
+	}
+
+	.menu-user-info:hover {
+		font-size: 1.2em;
+		font-weight: bold;
+		color: white;
+		padding: 0 .5em;
+		text-shadow: 2px 2px black;
+		opacity: 1;
+	}
+
+	/*main section*/
+
+	.info-break {
+		margin: 0 auto;
+		color: black;
+	}	
+
+	.info-break-text {
+		margin: 0 auto;
+		font-size: 1.7em;
+	}
+
+	.how-it-works {
+		font-size: 2em;
+	}
+
+	.arrow-down {
+		font-size: 2em;
+		padding: 0 1em;
+	}
+
+	#section2 {
+		margin-top: 2em;
+		background-color: white;
+	}
+
+	.stopka {
+		max-width: 120px;
+		max-height: 120px;
+	}
+
+	
+
+
+	
+
+
+
+	
