@@ -1,5 +1,5 @@
 	body {
-		background-color: #fff;
+		background-color: #f6f9f7;
 	}
 
 	/*header section*/
@@ -44,6 +44,7 @@
 	@media screen and ( max-width: 481px){
 		#menu {
 			margin-top: .5em;
+			margin-right: 1em;
 		}
 	}
 	@media screen and (min-width: 482px) {
@@ -79,7 +80,10 @@
 	}
 
 	/*main section*/
-
+	
+	.how-it-works {
+		font-size: 1.5em;
+	}
 	.info-break {
 		margin: 0 auto;
 		color: black;
@@ -90,16 +94,13 @@
 		font-size: 1.7em;
 	}
 
-	.how-it-works {
-		font-size: 2em;
-	}
-
 	.arrow-down {
-		font-size: 2em;
-		padding: 0 1em;
+		font-size: 3em;
+		padding: 1 1em;
 	}
 
 	#section2 {
+		padding: 1em 0 1em 0;
 		margin-top: 2em;
 		background-color: white;
 	}
@@ -107,6 +108,18 @@
 	.stopka {
 		max-width: 120px;
 		max-height: 120px;
+	}
+
+	/*slider*/
+	.slider {
+		margin: 0 auto !important;
+		width: 180px;
+		height: 220px!important;
+	}
+	
+	.slides {
+		border: 1px solid black;
+		height: 170px!important;
 	}
 
 	

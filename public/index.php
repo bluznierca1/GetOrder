@@ -106,6 +106,26 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="row hide-on-med-and-up center-align">
+				<div class="slider">
+			    <ul class="slides">
+			      <li>
+			        <img src="images/steps/first1.png" class="responsive-img hehe">
+			      </li>
+			      <li>
+			        <img src="images/steps/second2.png" class="responsive-img "> 
+			      </li>
+			      <li>
+			        <img src="images/steps/third3.png" class="responsive-img ">
+			      </li>
+			      <li>
+			        <img src="images/steps/fourth4.png" class="responsive-img "> 
+			        </div>
+			      </li>
+			    </ul>
+	  		</div>
+  		</div>
 		</section>
 
 	</main>
