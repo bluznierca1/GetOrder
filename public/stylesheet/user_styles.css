@@ -1,0 +1,16 @@
+.register-user-panel {
+	width: 50%;
+}
+
+.errors-container {
+	width: 50%;
+}
+
+.errors-title {
+	font-size: 2em !important;
+	color: red;
+}
+
+.message-container {
+	width: 50%;
+}
