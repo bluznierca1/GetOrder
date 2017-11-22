@@ -1,17 +1,31 @@
 <?php require_once("../../includes/initialize.php"); ?>
 <?php 
+
+	if( $session_admin->is_logged_in() ){
+		redirect_to("index.php");
+	}
 	
-	if( isset($_SUBMIT['submit']) ){
+	if( isset($_POST['submit']) ){
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
+
+		$found_admin = Admin::authenticate($username, $password);
+
+		if( $found_admin ){
+			$session_admin->login($found_admin);
+			redirect_to("index.php");
+		} else {
+			$session_admin->message = "Username/Password is wrong.";
+		}
 	} else {
 		$username = "";
+		$password = "";
 	}
 
 ?>
 
 
-<?php include("../layouts/admin_header.php"); ?>
+<?php include("../layouts/header/admin_header.php"); ?>
 
 <main role="main">
 	<header>
@@ -21,10 +35,10 @@
 			</span>
 		</span>
 	</header>
+	<?php echo isset($session_admin->message) ? display_message_errors($session_admin->message) : ""; ?>
 	<section role="section" id="section1">
-		
 	<div class="row login-admin-panel">
-    <form class="col s12">
+    <form class="col s12" action="login.php" method="post" role="form">
       <div class="row">
         <div class="input-field col s12">
           <input value="<?php echo $username; ?>" id="username" name="username" type="text" class="validate">
@@ -35,13 +49,14 @@
           <label for="last_name">Password</label>
         </div>
         <div class="input-field col s12">
-					<input type="submit" class="waves-effect waves-light btn" name="submit" value="Login" >
+			<input type="submit" class="waves-effect waves-light btn" name="submit" value="Login" >
         </div>
       </div>
     </form>
+    <a href="../index.php">Home</a>
   </div>
 
 	</section>
 </main>
 
-<?php include("../layouts/admin_footer.php"); ?>
+<?php include("../layouts/footer/admin_footer.php"); ?>
