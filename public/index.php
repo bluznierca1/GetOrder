@@ -1,5 +1,5 @@
 
-<?php include("layouts/header_menu.php"); ?>
+<?php include("layouts/header/header_menu.php"); ?>
 
 	<main role="main" id="main">
 		<section id="section1">
@@ -65,12 +65,10 @@
 			    </ul>
 	  		</div>
   		</div>
-		</section>
-
-		
+		</section>	
 
 	</main>
 
-	<?php include("layouts/footer.php"); ?>
+	<?php include("layouts/footer/footer.php"); ?>
 
 	

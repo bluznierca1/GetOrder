@@ -55,8 +55,7 @@
               a.title = "name";
               a.href = "../chosen_restaurant.php?restaurant_id=" + restaurant_id;
               a.className = "restaurant-link";
-              
-//
+
               strong.textContent = name;
               infowincontent.className = "restaurant-link-container";
               infowincontent.appendChild(a);

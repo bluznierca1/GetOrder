@@ -7,4 +7,7 @@ $(document).ready(function(){
 	 	height: 150,
 	 	width: 150,
 	 });
+	 $('.button-collapse').sideNav({
+	 	closeOnClick: true,
+	 });
 });
