@@ -1,6 +1,10 @@
 <?php require_once("../../includes/initialize.php"); ?>
 <?php
 
+	if( $session_user->is_logged_in() ){
+		redirect_to("index.php");
+	}
+
 	if( isset($_POST['submit']) ){
 		
 		$required_fields = ['username', 'password', 'first_name', 'last_name', 'email'];
@@ -14,9 +18,10 @@
 		passwords_match($password_first_version, $confirmed_password);
 
 		$user = new User();
-		$user->username = trim($_POST['username']);
+		$user->username = $_POST['username'];
 		// $user->password = password_encrypt($password_first_version);
 		$user->password = $password_first_version;
+		$user->type = 'user';
 		$created_time = strftime("%Y-%m-%d %H:%M:%S", time());
 		$user->created = date("Y-m-d H:i:s", strtotime($created_time));
 		$user->first_name = trim($_POST['first_name']);
@@ -27,20 +32,20 @@
 			if( !$user->username_exists($user->username) ) {
 				if ( !$user->email_exists($user->email) ){
 					$user->save();
-					$_SESSION['message'] = "Your account has been created. Time to log in.";
+					$_SESSION['message_user'] = "Your account has been created. Time to log in.";
 					redirect_to("login.php");
 				} else {
-					$message = "This email is taken. Use another.";
+					$message_user = "This email is taken. Use another.";
 				}
 			} else {
-				$message = "User with that username exists. Use another.";
+				$message_user = "User with that username exists. Use another.";
 			}
 		} else {
-			$message = "";
+			$message_user = "";
 		}
 		
 	} else {
-		$message = "";
+		$message_user = "";
 		$username = "";
 		$password = "";
 		$first_name = "";
@@ -49,7 +54,7 @@
 	}
 
 ?>
-<?php include("../layouts/user_header.php"); ?>
+<?php include("../layouts/header/user_header.php"); ?>
 
 <main role="main">
 	<header>
@@ -61,7 +66,7 @@
 	</header>
 	<section role="section" id="section1">
 	<?php echo display_errors($errors); ?>
-	<?php echo display_message_errors($message); ?>
+	<?php echo display_message_errors($message_user); ?>
 	<div class="row register-user-panel">
     <form class="col s12" action="register.php" method="post" role="form">
       <div class="row">
@@ -94,3 +99,5 @@
 
 	</section>
 </main>
+
+<?php include("../layouts/footer/user_footer.php"); ?>
