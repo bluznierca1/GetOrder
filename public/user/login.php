@@ -2,6 +2,10 @@
 
 <?php 
 
+	if( $session_user->is_logged_in() ){
+		redirect_to("index.php");
+	}
+
 	if( isset($_POST['submit']) ){
 
 		$username = trim($_POST['username']);
@@ -12,24 +16,23 @@
 
 		if( empty($errors) ){
 			if( $found_user ){
-				$session->login($found_user);
-				$_SESSION['message'] = $user;
-				redirect_to("test.php");
+				$session_user->login($found_user);
+				redirect_to("index.php");
 			} else {
 				// Username/Password combo was not found in the database
-				$message = "Username/Password incorrect.";
+				$message_user = "Username/Password incorrect.";
 			}
 		}
 
 	} else { //Form was not submitted.
 		$username = "";
 		$password = "";
-		$message = "";
+		$message_user = "";
 	}
 
 ?>
 
-<?php include("../layouts/user_header.php"); ?>
+<?php include("../layouts/header/user_header.php"); ?>
 
 <main role="main">
 	<header>
@@ -41,7 +44,8 @@
 	</header>
 	<section role="section" id="section1">
 	<?php echo display_errors($errors); ?>
-	<?php echo display_message_errors($message); ?>
+	<?php echo display_message_errors($message_user); ?>
+	<?php echo isset($found_user) ? print_r($found_user) : ""; ?>
 	<div class="row register-user-panel">
     <form class="col s12" action="login.php" method="post" role="form">
       <div class="row">
@@ -56,7 +60,10 @@
         </div>
       </div>
     </form>
+    <a href="../index.php">Home</a>
   </div>
 
 	</section>
 </main>
+
+<?php include("../layouts/footer/user_footer.php"); ?>
