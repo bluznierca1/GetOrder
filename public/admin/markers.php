@@ -1,6 +1,17 @@
 <?php require_once("../../includes/initialize.php"); ?>
 
 <?php 
+	
+	if ( !$session_admin->is_logged_in() ){
+		$message_admin = "You are not logged in. Just do it.";
+		redirect_to("login.php");
+	} else if( $session_user->is_logged_in() ){
+		$message_user = "You are logged in as User. Can not go to Admin panel.";
+		redirect_to("../user/index.php");
+	} else if ($session_restaurant->is_logged_in() ){
+		$message_restaurant = "You are logged in as Restaurant. Can not go to admin panel.";
+		redirect_to("../restaurant/index.php");
+	}
 
 	function parseToXML($htmlStr){
 		$xmlStr = str_replace('<', '&lt', $htmlStr);

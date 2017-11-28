@@ -26,3 +26,27 @@ span.buton-collapse-close {
 	color: black;
 	text-decoration: none;
 }
+
+.restaurant-title {
+	font-size: 2em;
+}
+
+.restaurant-subtitle {
+	font-size: 1.2em !important;
+}
+
+.restaurant-panel-message {
+	font-size: 1.5em;
+}
+
+/*table */
+	.table-container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+/*edit account*/
+.edit-form {
+	margin: 0 auto;
+	width: 80%;
+}

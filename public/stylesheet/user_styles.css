@@ -36,6 +36,18 @@ span.buton-collapse-close {
 	text-decoration: none;
 }
 
+.user-title {
+	font-size: 2em;
+}
+
+.user-subtitle {
+	font-size: 1.2em !important;
+}
+
+.user-panel-message {
+	font-size: 1.5em;
+}
+
 /*Map styles*/
 
 #map {
@@ -53,3 +65,16 @@ span.buton-collapse-close {
 	color: red;
 	text-decoration: none;
 }
+
+/*table */
+	.table-container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+/*edit account form */
+.edit-form {
+	margin: 0 auto;
+	width: 80%;
+}
+

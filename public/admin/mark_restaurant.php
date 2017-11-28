@@ -1,8 +1,19 @@
 <?php require_once("../../includes/initialize.php"); ?>
 
 <?php 
-	
 
+	if ( !$session_admin->is_logged_in() ){
+		$message_admin = "You are not logged in. Just do it.";
+		redirect_to("login.php");
+	} else if( $session_user->is_logged_in() ){
+		$message_user = "You are logged in as User. Can not go to Admin panel.";
+		redirect_to("../user/index.php");
+	} else if ($session_restaurant->is_logged_in() ){
+		$message_restaurant = "You are logged in as Restaurant. Can not go to admin panel.";
+		redirect_to("../restaurant/index.php");
+	}
+
+	$admin = Admin::find_by_id($_SESSION['admin_id']);
 	$restaurant = Restaurant::find_by_id($_GET['restaurant_id']);
 
 	if( isset($_POST['submit']) ){
@@ -37,11 +48,11 @@
     <form class="col s12" action="mark_restaurant.php?restaurant_id=<?php echo $restaurant->restaurant_id; ?>" method="post">
       <div class="row">
         <div class="input-field col s6">
-          <input value="<?php echo $restaurant->name; ?>" id="name" name="name" type="text" class="validate">
+          <input value="<?php echo htmlentities($restaurant->name); ?>" id="name" name="name" type="text" class="validate">
           <label for="name">Name</label>
         </div>
         <div class="input-field col s6">
-          <input value="<?php echo $address?>" id="address" type="text" class="validate" name="address">
+          <input value="<?php echo htmlentities($address); ?>" id="address" type="text" class="validate" name="address">
           <label for="address">Address</label>
         </div>
       </div>
@@ -56,9 +67,9 @@
         </div>
       	
       	<div class="row">
-					<div class="col s12 center-align">
-						<input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn">
-					</div>
+			<div class="col s12 center-align">
+				<input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn">
+		</div>
       	</div>
       
     </form>

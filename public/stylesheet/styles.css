@@ -67,6 +67,37 @@
 		}
 	}
 
+	/*button of choice*/
+	.choice-h1{
+		font-size: 4em;
+	}
+
+	.choice-general {
+		opacity: .9;
+		background-color: #e65100;
+		color: white;
+		padding: .2em 1em;
+		border-radius: 5px;
+	}
+
+	.choice-h2 {
+		font-size: 2em;
+	}
+
+	.choice-text {
+		padding: .2em .6em;
+		background-color: #ef6c00;
+		color: white;
+		border-radius: 8px;
+	}
+
+	.choice-text:hover {
+		padding: .2em .6em;
+		background-color: #e65100;
+		color: white;
+		border-radius: 8px;
+	}
+
 	/*Random navbar*/
 
 	.buton-collapse-close-container{
@@ -147,6 +178,25 @@
 		height: 170px!important;
 	}
 
+	/*Map styles*/
+
+#map {
+  height: 80vh;
+  width: 100%;
+}
+
+.restaurant-link-container {
+	width: 100%;
+}
+
+.restaurant-link {
+	margin-left: 1em;
+	font-weight: bold;
+	color: red;
+	text-decoration: none;
+}
+
+	
 	
 
 

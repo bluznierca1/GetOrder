@@ -3,7 +3,14 @@
 
 <?php
 
-	if( $session_user->is_logged_in() ){
+	if ( $session_admin->is_logged_in() ){
+		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		redirect_to("../admin/index.php");
+	} else if( $session_user->is_logged_in() ){
+		$message_user = "You are logged in as User. Can not go to restaurant panel.";
+		redirect_to("../user/index.php");
+	} else if ($session_restaurant->is_logged_in() ){
+		$message_restaurant = "Can not register when you are logged in.";
 		redirect_to("index.php");
 	}
 
@@ -39,7 +46,7 @@
 			if( !$restaurant->username_exists($restaurant->username) ) {
 				if ( !$restaurant->email_exists($restaurant->email) ){
 					$restaurant->save();
-					$_SESSION['message_restaurant'] = "Registered. Time to log in.";
+					$message_restaurant = "Registered. Time to log in.";
 					redirect_to("login.php");
 					// $message_restaurant = $restaurant->save();
 				} else {
@@ -61,7 +68,7 @@
 	}
 
 ?>
-<?php include("../layouts/header/restaurant_header.php"); ?>
+<?php include("../layouts/header/restaurant_header_menu.php"); ?>
 <main role="main">
 	<header>
 		<div class="row">
@@ -78,42 +85,52 @@
       <div class="row">
         <div class="input-field col s12 m6 l6">
           <input  id="username" name="username" type="text" class="validate" <?php echo isset($restaurant->username)  && $restaurant->username != "" ? "value=\"{$restaurant->username}\"" : "placeholder=\"Username:\"" ?>>
+          <label for="username">Username</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="password" type="password" name="password" class="validate" placeholder="Password:">
+          <label for="password">Password</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="confirm_password" type="password" name="confirmed_password" class="validate" placeholder="Confirm Password:">
+          <label for="confirm_password">Confirm password</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="name" type="text" name="name" class="validate" <?php echo isset($restaurant->name) && $restaurant->name != ""  ? "value=\"{$restaurant->name}\"" : "placeholder=\"Name of the restaurant:\"" ?> >
+          <label for="name">Restaurant's Name</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="email" type="text" name="email" class="validate" <?php echo isset($restaurant->email) && $restaurant->email != "" ? "value=\"{$restaurant->email}\"" : "placeholder=\"Email:\"" ?> >
+          <label for="email">E-mail</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="phone_number" type="tel" name="phone_number" class="validate" <?php echo isset($restaurant->phone_number) && $restaurant->phone_number != "" ? "value=\"{$restaurant->phone_number}\"" : "placeholder=\"Phone Number\"" ?> >
+          <label for="phone_number">Phone number</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="city" type="text" name="city" class="validate" <?php echo isset($restaurant->city) && $restaurant->city != "" ? "value=\"{$restaurant->city}\"" : "placeholder=\"City\"" ?> >
+          <label for="city">City</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="street" type="text" name="street" class="validate" <?php echo isset($restaurant->street) && $restaurant->street != "" ? "value=\"{$restaurant->street}\"" : "placeholder=\"Name of the Street\"" ?> >
+          <label for="street">Street</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="number" type="number" name="number" class="validate" <?php echo isset($restaurant->number) && $restaurant->number != "" ? "value=\"{$restaurant->number}\"" : "placeholder=\"Building's number\"" ?> >
+          <label for="number">Building's number</label>
         </div>
 
         <div class="input-field col s12 m6 l6">
           <input id="zip_code" type="text" name="zip_code" class="validate" <?php echo isset($restaurant->zip_code) && $restaurant->zip_code != "" ? "value=\"{$restaurant->zip_code}\"" : "placeholder=\"Zip Code\"" ?> >
+          <label for="zip_code">Zip Code</label>
         </div>
 
         <div class="input-field col s12 right-align">

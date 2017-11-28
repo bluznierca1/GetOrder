@@ -24,6 +24,18 @@ span.buton-collapse-close {
 	margin: 0 auto;
 }
 
+.admin-title {
+	font-size: 2em;
+}
+
+.admin-subtitle {
+	font-size: 1.2em !important;
+}
+
+.admin-panel-message {
+	font-size: 1.5em;
+}
+
 /*Map styles*/
 
 #map {

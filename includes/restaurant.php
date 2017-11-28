@@ -202,6 +202,67 @@
 			}
 			// return $sql;
 		}
+
+		public function delete($id = null){
+			global $database;
+			$sql = "DELETE FROM " . self::$table_name ;
+			$sql .= " WHERE restaurant_id = {$id} LIMIT 1";
+
+			if( $database->query($sql) ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public static function unmark_restaurant($restaurant_id = null){
+			global $database;
+
+			$sql = "DELETE FROM markers ";
+			$sql .= "WHERE restaurant_id = {$restaurant_id} ";
+			$sql .= "LIMIT 1";
+
+			if( $database->query($sql) ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public static function edit($name="", $email="", $city="", $street="", $number=null, $phone_number=null, $restaurant_id=null){
+			global $database;
+
+			$sql = "UPDATE " . self::$table_name . " SET ";
+			$sql .= "name = '{$name}', ";
+			$sql .= "email = '{$email}', ";
+			$sql .= "city = '{$city}', ";
+			$sql .= "street = '{$street}', ";
+			$sql .= "number = '{$number}', ";
+			$sql .= "phone_number = '{$phone_number}' ";
+			$sql .= "WHERE restaurant_id = {$restaurant_id} ";
+			$sql .= " LIMIT 1";
+
+			if( $database->query($sql) ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public static function edit_password($new_password, $restaurant_id){
+			global $database;
+			
+			$sql = "UPDATE " . self::$table_name . " SET ";
+			$sql .= "password = '{$new_password}' ";
+			$sql .= "WHERE restaurant_id = {$restaurant_id} ";
+			$sql .= "LIMIT 1";
+
+			if( $database->query($sql) ){
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	$restaurant = new Restaurant();

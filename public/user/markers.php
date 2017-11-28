@@ -2,6 +2,16 @@
 
 <?php 
 
+	if ( $session_admin->is_logged_in() ){
+		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		redirect_to("../admin/index.php");
+	} else if( !$session_user->is_logged_in() ){
+		redirect_to("login.php");
+	} else if ($session_restaurant->is_logged_in() ){
+		$message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
+		redirect_to("../restaurant/index.php");
+	}
+
 	function parseToXML($htmlStr){
 		$xmlStr = str_replace('<', '&lt', $htmlStr);
 		$xmlStr=str_replace('>','&gt;',$xmlStr);

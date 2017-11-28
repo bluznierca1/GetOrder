@@ -1,8 +1,14 @@
 <?php require_once("../../includes/initialize.php"); ?>
 <?php 
 
-	if( $session_admin->is_logged_in() ){
+	if ( $session_admin->is_logged_in() ){
 		redirect_to("index.php");
+	} else if( $session_user->is_logged_in() ){
+		$message_user = "You are logged in as User. Can not go to Admin panel.";
+		redirect_to("../user/index.php");
+	} else if ($session_restaurant->is_logged_in() ){
+		$message_restaurant = "You are logged in as Restaurant. Can not go to admin panel.";
+		redirect_to("../restaurant/index.php");
 	}
 	
 	if( isset($_POST['submit']) ){
@@ -15,7 +21,7 @@
 			$session_admin->login($found_admin);
 			redirect_to("index.php");
 		} else {
-			$session_admin->message = "Username/Password is wrong.";
+			$message_admin = "Username/Password is wrong.";
 		}
 	} else {
 		$username = "";
@@ -42,11 +48,11 @@
       <div class="row">
         <div class="input-field col s12">
           <input value="<?php echo $username; ?>" id="username" name="username" type="text" class="validate">
-          <label for="first_name">Username</label>
+          <label for="username">Username</label>
         </div>
         <div class="input-field col s12">
           <input id="password" type="password" name="password" class="validate">
-          <label for="last_name">Password</label>
+          <label for="password">Password</label>
         </div>
         <div class="input-field col s12">
 			<input type="submit" class="waves-effect waves-light btn" name="submit" value="Login" >

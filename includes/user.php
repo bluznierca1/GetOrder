@@ -163,7 +163,7 @@
 			// return $sql;
 		}
 
-		public function remove($user_id){
+		public function delete($user_id){
 			global $database;
 
 			$sql = "DELETE FROM " . self::$table_name . " ";
@@ -172,6 +172,38 @@
 			$result = $database->query($sql);
 
 			if( $database->affected_rows() == 1 ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public function edit($username, $first_name, $last_name, $email, $user_id){
+			global $database;
+			$sql = "UPDATE " . self::$table_name . " SET ";
+			$sql .= "username = '{$username}', ";
+			$sql .= "first_name = '{$first_name}', ";
+			$sql .= "last_name = '{$last_name}', ";
+			$sql .= " email = '{$email}' ";
+			$sql .= "WHERE user_id = {$user_id} ";
+			$sql .= "LIMIT 1";
+
+			if( $database->query($sql) ){
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public static function edit_password( $new_password, $user_id ){
+			global $database;
+
+			$sql = "UPDATE " . self::$table_name . " SET ";
+			$sql .= " password = '{$new_password}' ";
+			$sql .= "WHERE user_id = {$user_id} ";
+			$sql .= "LIMIT 1";
+
+			if( $database->query($sql) ){
 				return true;
 			} else {
 				return false;

@@ -1,8 +1,14 @@
 <?php require_once("../../includes/initialize.php"); ?>
 <?php
 
-	if( $session_user->is_logged_in() ){
+	if ( $session_admin->is_logged_in() ){
+		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		redirect_to("../admin/index.php");
+	} else if( $session_user->is_logged_in() ){
 		redirect_to("index.php");
+	} else if ($session_restaurant->is_logged_in() ){
+		$message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
+		redirect_to("../restaurant/index.php");
 	}
 
 	if( isset($_POST['submit']) ){
@@ -54,7 +60,7 @@
 	}
 
 ?>
-<?php include("../layouts/header/user_header.php"); ?>
+<?php include("../layouts/header/user_header_menu.php"); ?>
 
 <main role="main">
 	<header>
@@ -68,25 +74,31 @@
 	<?php echo display_errors($errors); ?>
 	<?php echo display_message_errors($message_user); ?>
 	<div class="row register-user-panel">
-    <form class="col s12" action="register.php" method="post" role="form">
+    <form class="col s12 edit-form" action="register.php" method="post" role="form">
       <div class="row">
         <div class="input-field col s12">
           <input  id="username" name="username" type="text" class="validate" <?php echo isset($user->username)  && $user->username != "" ? "value=\"{$user->username}\"" : "placeholder=\"Username\"" ?> >
+          <label for="username">Username</label>
         </div>
         <div class="input-field col s12">
           <input id="password" type="password" name="password" class="validate" placeholder="Password">
+        	<label for="password">Password</label>
         </div>
         <div class="input-field col s12">
           <input id="confirm_password" type="password" name="confirmed_password" class="validate" placeholder="Confirm Password">
+        	<label for="confirm_password">Confirm Password</label>
         </div>
         <div class="input-field col s12">
           <input id="first_name" type="text" name="first_name" class="validate" <?php echo isset($user->first_name) && $user->first_name != ""  ? "value=\"{$user->first_name}\"" : "placeholder=\"First Name\"" ?> >
+        	<label for="first_name">First Name</label>
         </div>
         <div class="input-field col s12">
           <input id="last_name" type="text" name="last_name" class="validate" <?php echo isset($user->last_name) && $user->last_name != ""  ? "value=\"{$user->last_name}\"" : "placeholder=\"Last Name\"" ?> >
+          <label for="last_name">Last Name</label>
         </div>
         <div class="input-field col s12">
           <input id="email" type="email" name="email" class="validate" <?php echo isset($user->email) && $user->email != "" ? "value=\"{$user->email}\"" : "placeholder=\"Your email\"" ?> >
+          <label for="email">Email</label>
         </div>
         
         <div class="input-field col s12 right-align">

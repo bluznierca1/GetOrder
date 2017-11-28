@@ -6,6 +6,6 @@
 	} else {
 		$admin = Admin::find_by_id($_SESSION['admin_id']);
 		$session_admin->logout($admin);
-		redirect_to("login.php");
+		redirect_to("../index.php");
 	}
 ?>
