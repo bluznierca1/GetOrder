@@ -20,25 +20,19 @@
 
 		<section id="section2">
 			<div class="row">
-				<div class="col hide-on-small-only m3 center-align ">
+				<div class="col hide-on-small-only m4 center-align ">
 					<img src="images/steps/first.png" class="responsive-img stopka">
 					<div class="step-description">
 						<h5><span class="teal-text darken-1">1. Choose a restaurant	</span></h5>
 					</div>
 				</div>
-				<div class="col hide-on-small-only m3 center-align ">
+				<div class="col hide-on-small-only m4 center-align ">
 					<img src="images/steps/second.png" class="responsive-img stopka">
 					<div class="step-description">
 						<h5><span class="teal-text darken-1">2. Book a table</span></h5>	
 					</div>
 				</div>
-				<div class="col hide-on-small-only m3 center-align ">
-					<img src="images/steps/third.png" class="responsive-img stopka">
-					<div class="step-description">
-						<h5><span class="teal-text darken-1">3. Pick up your menu and pay</span></h5>
-					</div>
-				</div>
-				<div class="col hide-on-small-only m3 center-align ">
+				<div class="col hide-on-small-only m4 center-align ">
 					<img src="images/steps/fourth.png" class="responsive-img stopka">
 					<div class="step-description">
 						<h5><span class="teal-text darken-1">4. Come and enjoy without waiting!</span></h5>	

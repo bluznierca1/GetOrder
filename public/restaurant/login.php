@@ -2,7 +2,13 @@
 
 <?php 
 
-	if( $session_restaurant->is_logged_in() ){
+	if ( $session_admin->is_logged_in() ){
+		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		redirect_to("../admin/index.php");
+	} else if( $session_user->is_logged_in() ){
+		$message_user = "You are logged in as User. Can not go to restaurant panel.";
+		redirect_to("../user/index.php");
+	} else if ($session_restaurant->is_logged_in() ){
 		redirect_to("index.php");
 	}
 
@@ -32,7 +38,7 @@
 
 ?>
 
-<?php include("../layouts/header/restaurant_header.php"); ?>
+<?php include("../layouts/header/restaurant_header_menu.php"); ?>
 
 <main role="main">
 	<header>
@@ -50,9 +56,11 @@
       <div class="row">
         <div class="input-field col s12">
           <input  id="username" name="username" type="text" class="validate" placeholder="Username">
+          <label for="username">Username</label>
         </div>
         <div class="input-field col s12">
           <input id="password" type="password" name="password" class="validate" placeholder="Password">
+          <label for="password">Password</label>
         </div>        
         <div class="input-field col s12 right-align">
 			<input type="submit" class="waves-effect waves-light btn" name="submit" value="Register" >

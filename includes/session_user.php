@@ -5,7 +5,7 @@
 	class SessionUser {
 		private $logged_in = false;
 		public $user_id;
-		public $message;
+		public $message_user;
 
 		function __construct(){
 			// session_start();
@@ -46,18 +46,18 @@
 			if( !empty($msg)){
 				$_SESSION['message_user'] = $msg;
 			} else {
-				return $this->message;
+				return $this->message_user;
 			}
 		}
 
 		private function check_message(){
-			if( isset($_SESSION['message']) ){
+			if( isset($_SESSION['message_user']) ){
 				// Adding as an attribute
-				$this->message = $_SESSION['message'];
+				$this->message_user = $_SESSION['message_user'];
 				// unsetting $_SESSION element to have it disappeared after refreshing
-				unset($_SESSION['message']);
+				unset($_SESSION['message_user']);
 			} else {
-				$this->message = "";
+				$this->message_user = "";
 			}
 		}
 	}

@@ -1,18 +1,7 @@
+<?php require_once("../includes/initialize.php"); ?>
 
-<?php require_once("../../includes/initialize.php"); ?>
-<?php 
-  if ( $session_admin->is_logged_in() ){
-    $message_admin = "You are logged in as Admin. Can not go to user panel.";
-    redirect_to("../admin/index.php");
-  } else if( !$session_user->is_logged_in() ){
-    redirect_to("login.php");
-  } else if ($session_restaurant->is_logged_in() ){
-    $message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
-    redirect_to("../restaurant/index.php");
-  }
-  ?>
 
-  <?php include("../layouts/header/user_header_menu.php"); ?>
+  <?php include("layouts/header/header_menu.php"); ?>
     
     <div class="row">
       <div class="col s12 center-align">
@@ -60,7 +49,7 @@
               var linkText = document.createTextNode(name);
               a.appendChild(linkText);
               a.title = "name";
-              a.href = "../chosen_restaurant.php?restaurant_id=" + restaurant_id;
+              a.href = "chosen_restaurant.php?restaurant_id=" + restaurant_id;
               a.className = "restaurant-link";
               
 //
@@ -113,7 +102,6 @@
     <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrkNhzYLD9ikPIE2N6Kzg0SGQmVfyyGDA&libraries=places&callback=initMap">
     </script> -->
-    <?php include("../layouts/footer/user_footer.php"); ?>
+    <?php include("layouts/footer/footer.php"); ?>
   </body>
 </html>
- 

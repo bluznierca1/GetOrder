@@ -5,7 +5,7 @@
 	if( $session_restaurant->is_logged_in() ){
 		$restaurant = User::find_by_id($_SESSION['restaurant_id']);
 		$session_restaurant->logout($restaurant);
-		redirect_to("login.php");
+		redirect_to("../index.php");
 	} else {
 		redirect_to("login.php");
 	}

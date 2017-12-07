@@ -9,9 +9,17 @@
 					<div class="row">
 					<!-- dividing header into two sections: logo and menu -->
 						<div class="col s2 center-align">
-							<span><a href="../../index.php"><img src="../images/logo/logo.png" class="logo"></a></span>
+							<span><a href="../index.php"><img src="../images/logo/logo.png" class="logo"></a></span>
 						</div>
-					<?php include("../layouts/navbar/restaurant_navbar.php"); ?>
+
+					<?php 
+						if( $session_restaurant->is_logged_in() ){
+							include("../layouts/navbar/restaurant_navbar.php");
+						} else {
+							include("../layouts/navbar/random_navbar.php");
+						}
+					?>
+					<?php include("../layouts/restaurant_choice/restaurant_restaurant_choice.php"); ?>
 
 					<div class="parallax">
 						<img src="../images/home/home_photo.jpg">

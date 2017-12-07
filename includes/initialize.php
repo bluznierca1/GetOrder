@@ -17,6 +17,9 @@ just for spacing space and making it easier -->
 	<!-- Functionality is to keep functions loaded before any classes tasks -->
 <?php require_once("validation_functions.php"); ?>
 
+<?php require_once("reservation.php"); ?>
+<?php require_once("pagination.php"); ?>
+<?php require_once("table.php"); ?>
 <?php require_once("admin.php"); ?>
 <?php require_once("user.php"); ?>
 <?php require_once("restaurant.php"); ?>
