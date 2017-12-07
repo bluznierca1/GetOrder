@@ -95,7 +95,11 @@
             <td><?php echo htmlentities($mark->restaurant_id); ?></td>
             <td><?php echo htmlentities($mark->username); ?></td>
             <td><?php echo htmlentities($mark->created); ?></td>
+<<<<<<< HEAD
             <td><?php echo htmlentities($mark->name); ?></td>
+=======
+            <td><?php echohtmlentities($mark->name); ?></td>
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
             <td><?php echo htmlentities($mark->email); ?></td>
             <td><?php echo htmlentities($mark->city); ?></td>
             <td><?php echo htmlentities($mark->street); ?></td>

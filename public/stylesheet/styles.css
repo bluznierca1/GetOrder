@@ -84,7 +84,11 @@
 
 	/*button of choice*/
 	.choice-h1{
+<<<<<<< HEAD
 		font-size: 3.5em;
+=======
+		font-size: 4em;
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	}
 
 	.choice-general {
@@ -99,6 +103,7 @@
 		font-size: 2em;
 	}
 
+<<<<<<< HEAD
 	@media screen and ( max-width:480px ) {
 		.choice-h1 {
 			font-size: 1.5em;
@@ -129,6 +134,8 @@
 		}
 	}
 
+=======
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	.choice-text {
 		padding: .2em .6em;
 		background-color: #ef6c00;
@@ -241,6 +248,7 @@
 	text-decoration: none;
 }
 
+<<<<<<< HEAD
 	/*restaurants secion*/
 .restaurants-filter {
 	position: absolute;
@@ -268,6 +276,9 @@
 .card-caption {
 	font-size: 1.1em;
 }
+=======
+	
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	
 .card-address {
 	padding-left: 1em;

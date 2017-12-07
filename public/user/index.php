@@ -12,6 +12,11 @@ require_once("../../includes/initialize.php");
 	}
 	
 	$user = User::find_by_id($_SESSION['user_id']);
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 ?>
 
 <?php include("../layouts/header/user_header_menu.php"); ?>

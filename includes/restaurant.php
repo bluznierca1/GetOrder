@@ -262,7 +262,11 @@
 			}
 		}
 
+<<<<<<< HEAD
 		public static function edit_password($new_password = "", $restaurant_id = null){
+=======
+		public static function edit_password($new_password, $restaurant_id){
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 			global $database;
 			
 			$sql = "UPDATE " . self::$table_name . " SET ";
@@ -276,6 +280,7 @@
 				return false;
 			}
 		}
+<<<<<<< HEAD
 
 		public static function edit_caption($caption = "", $id = null){
 			global $database;
@@ -293,6 +298,8 @@
 		}
 
 		
+=======
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	}
 
 	$restaurant = new Restaurant();

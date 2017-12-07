@@ -12,6 +12,7 @@ require_once("../../includes/initialize.php");
 	}
 
 	$restaurant = Restaurant::find_by_id($_SESSION['restaurant_id']);
+<<<<<<< HEAD
 	$table = Table::find_by_restaurant_id($restaurant->restaurant_id);
 	$available_tables = Table::find_available_by_restaurant_id($restaurant->restaurant_id);
 
@@ -42,6 +43,11 @@ require_once("../../includes/initialize.php");
 				}
 			}
 		}
+=======
+	
+?>
+<?php include("../layouts/header/restaurant_header_menu.php"); ?>
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 
 		// submiting caption
 	}	else if( isset($_POST['submit_caption']) ){
@@ -62,7 +68,11 @@ require_once("../../includes/initialize.php");
 <?php include("../layouts/header/restaurant_header_menu.php"); ?>
 	<div class="row">
 		<div class="col s12 center-align">
+<<<<<<< HEAD
 			<h3 class="restaurant-panel-message"><?php echo display_message_errors($message_restaurant); ?></h3>
+=======
+			<h3 class="restaurant-panel-message"><?php echo display_message_errors($session_restaurant->message_restaurant); ?></h3>
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 			<h1 class="teal-text darken-2 restaurant-title">Hello, <?php echo $restaurant->name; ?>!</h1>
 			<h2 class="restaurant-subtitle">Here is your panel.</h2>
 		</div>

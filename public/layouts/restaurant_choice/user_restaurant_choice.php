@@ -13,7 +13,11 @@
 			<h2 class="choice-h2"><a href="map.php"><span class="choice-text">From map</span></a></h2>
 		</div>
 		<div class="col s12 m2 center-align">
+<<<<<<< HEAD
 			<h2 class="choice-h2"><a href="../restaurants.php"><span class="choice-text">From List</span></a></h2>
+=======
+			<h2 class="choice-h2"><a href="restaurants.php"><span class="choice-text">From List</span></a></h2>
+>>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 		</div>
 		<div class="col m4">
 		</div>
