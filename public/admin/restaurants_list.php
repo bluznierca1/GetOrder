@@ -18,13 +18,12 @@
 ?>
 
 <?php include("../layouts/header/admin_header_menu.php"); ?>
-	<div class="row">
-  <div class="s12 center-align">
-    <h2 class="teal-text lighten-2">Marked</h2>
-    <p><?php echo display_message_errors($message_admin); ?></p>
-  </div>
- 		<div class="s12 table-container">
-    	<table class="responsive-table bordered">
+
+	<div class="row">    
+ 		<div class="col s12 m10 offset-m1">
+    	<h1 class="teal-text darken-2 center-align font-h1">Marked</h1>
+      <p><?php echo display_message_errors($message_admin); ?></p>
+      <table class="responsive-table bordered">
         <thead>
           <tr>
               <th>ID</th>
@@ -65,10 +64,8 @@
 
   
    <div class="row">
-  <div class="s12 center-align">
-    <h2 class="teal-text lighten-2">To Mark </h2>
-  </div>
-    <div class="s12 table-container">
+    <div class="col s12 m10 offset-m1">
+      <h2 class="teal-text darken-2 center-align font-h1">To Mark </h2>
       <table class="responsive-table bordered">
         <thead>
           <tr>
@@ -95,11 +92,7 @@
             <td><?php echo htmlentities($mark->restaurant_id); ?></td>
             <td><?php echo htmlentities($mark->username); ?></td>
             <td><?php echo htmlentities($mark->created); ?></td>
-<<<<<<< HEAD
             <td><?php echo htmlentities($mark->name); ?></td>
-=======
-            <td><?php echohtmlentities($mark->name); ?></td>
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
             <td><?php echo htmlentities($mark->email); ?></td>
             <td><?php echo htmlentities($mark->city); ?></td>
             <td><?php echo htmlentities($mark->street); ?></td>
