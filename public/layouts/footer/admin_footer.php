@@ -1,4 +1,4 @@
-<footer  style="height: 900px;">
+<footer>
 	</footer>
 
 
