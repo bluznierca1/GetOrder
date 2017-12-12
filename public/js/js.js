@@ -22,5 +22,12 @@ $(document).ready(function(){
 	    aftershow: function(){} //Function for after opening timepicker
   	});
 	 $('select').material_select();
-	 
+	 $('#edit-tables-button').click(function() {
+	 	if( $('#edit-tables-container').hasClass('edit-tables-form-hidden') ){
+	 		$('#edit-tables-container').removeClass('edit-tables-form-hidden');	
+	 	} else {
+	 		$('#edit-tables-container').addClass('edit-tables-form-hidden');
+	 	}
+	 	
+	 });
 });
