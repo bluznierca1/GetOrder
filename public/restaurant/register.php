@@ -72,8 +72,8 @@
 <main role="main">
 	<header>
 		<div class="row">
-			<div class="col s12 center-align">
-				<h1><span class="teal-text darken-1">Restaurant Registration Panel</span></h1>
+			<div class="col s12">
+				<h1 class="teal-text darken-1 center-align font-h1">Restaurant Registration Panel</h1>
 			</span>
 		</span>
 	</header>
@@ -133,7 +133,7 @@
           <label for="zip_code">Zip Code</label>
         </div>
 
-        <div class="input-field col s12 right-align">
+        <div class="input-field col s12 center-align">
 			<input type="submit" class="waves-effect waves-light btn" name="submit" value="Register" >
         </div>
 
