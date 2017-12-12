@@ -7,19 +7,15 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col m4">
+		<div class="col m3">
 		</div>
-		<div class="col s12 m2  center-align">
+		<div class="col s12 m3  center-align">
 			<h2 class="choice-h2"><a href="map.php"><span class="choice-text">From map</span></a></h2>
 		</div>
-		<div class="col s12 m2 center-align">
-<<<<<<< HEAD
+		<div class="col s12 m3 center-align">
 			<h2 class="choice-h2"><a href="../restaurants.php"><span class="choice-text">From List</span></a></h2>
-=======
-			<h2 class="choice-h2"><a href="restaurants.php"><span class="choice-text">From List</span></a></h2>
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 		</div>
-		<div class="col m4">
+		<div class="col m3">
 		</div>
 	</div>
 </div>
