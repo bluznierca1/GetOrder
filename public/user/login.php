@@ -67,7 +67,6 @@
         </div>
       </div>
     </form>
-    <a href="../index.php">Home</a>
   </div>
 
 	</section>
