@@ -209,6 +209,15 @@
 				return false;
 			}
 		}
+
+		public static function count_reservations($user_id){
+			global $database;
+			$sql = "SELECT * FROM display_reservations ";
+			$sql .= "WHERE user_id = {$user_id} ";
+			$result = $database->query($sql);
+			$amount = $database->num_rows($result);
+			return $amount;
+		}
 	}
 
 	$user = new User();
