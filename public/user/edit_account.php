@@ -37,23 +37,23 @@
 <?php include("../layouts/header/user_header_menu.php"); ?>
 
 	<div class="row">
-		<div class="s12 center-align">
-			<h1 class="teal-text darken-2">Edit Account </h1>
+		<div class="col s12">
+			<h1 class="teal-text darken-2 center-align font-h1">Edit Account </h1>
 		</div>
 	</div>
 
 	<div class="row">
 		<?php echo isset($message_user) ? display_message_errors($message_user) : ""; ?>
 		<form class="s12 edit-form" method="post" action="edit_account.php">
-			<div class="col s12 m6">
+			<div class="col s12 m6 input-field">
 				<input type="text" name="first_name" class="validate" value="<?php echo htmlentities($user->first_name);?>" >
 				<label for="first_name">First Name</label>
 			</div>
-			<div class="col s12 m6">
+			<div class="col s12 m6 input-field">
 				<input type="text" name="last_name" class="validate" value="<?php echo htmlentities($user->last_name); ?> " >
 				<label for="last_name">Last Name</label>
 			</div>
-			<div class="col s12 m6">
+			<div class="col s12 m6 input-field">
 				<input type="email" name="email" class="validate" value="<?php echo htmlentities($user->email); ?>" >
 				<label for="email">Email</label>
 			</div>
