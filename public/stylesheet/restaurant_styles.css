@@ -65,7 +65,6 @@ span.buton-collapse-close {
 .edit-form {
 	margin: 0 auto;
 	width: 80%;
-<<<<<<< HEAD
 }
 
 
@@ -136,6 +135,17 @@ span.buton-collapse-close {
 	height: 1em;
 }
 
-=======
+.edit-tables-form-hidden {
+	display: none;
 }
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
+
+/*footer*/
+.page-footer {
+	background-color: #fb8c00;
+	margin-top: 2em;
+}
+
+.footer-copyright {
+	background-color: black;
+}
+
