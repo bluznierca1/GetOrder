@@ -76,9 +76,8 @@ span.buton-collapse-close {
 }
 
 .restaurant-link {
-	margin-left: 1em;
-	font-weight: bold;
-	color: red;
+	font-weight: bold
+	color: #00796b;
 	text-decoration: none;
 }
 
@@ -94,14 +93,12 @@ span.buton-collapse-close {
 	width: 80%;
 }
 
-<<<<<<< HEAD
 /*button of choice*/
 .choice-h1{
 	font-size: 3.5em;
 }
 
 .choice-general {
-	opacity: .9;
 	background-color: #e65100;
 	color: white;
 	padding: .2em 1em;
@@ -140,5 +137,23 @@ span.buton-collapse-close {
 	}
 }
 
-=======
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
+/*index page*/
+.card-title-user {
+	font-size: 1.5em;
+	font-weight: bold;	
+}
+
+.card-details-font {
+	font-size: 1.1em;
+}
+
+/*footer*/
+.page-footer {
+	background-color: #fb8c00;
+	margin-top: 2em;
+}
+
+.footer-copyright {
+	background-color: black;
+}
+
