@@ -20,12 +20,8 @@
 		<li><div class="divider"></div></li>
 		<li><a href="admin/users_list.php"><i class="material-icons">group</i>Users</a></li>
 		<li><div class="divider"></div></li>
-		<li><a href="#"><i class="material-icons">insert_drive_file</i>Users files</a></li>
-	  	<li><div class="divider"></div></li>
 	  	<li><a href="admin/restaurants_list.php"><i class="material-icons">restaurant</i>Restaurants</a></li>
 	    <li><div class="divider"></div></li>
-		<li><a href="#"><i class="material-icons">more</i>Rest Files</a></li>
-	  	<li><div class="divider"></div></li>
 		<li><a href="#"><i class="material-icons">report</i>Problems</a></li>
 		<li><div class="divider"></div></li>
 		<li><a href="admin/map.php"><i class="material-icons">map</i>Map</a></li>

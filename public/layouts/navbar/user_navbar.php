@@ -18,21 +18,11 @@
 		</li>
 		<li><a href="index.php"><i class="material-icons">group</i>My account</a></li>
 		<li><div class="divider"></div></li>
-<<<<<<< HEAD
 		<li><a href="edit_account.php"><i class="material-icons">mode_edit</i>Account</a></li>
 		<li><div class="divider"></div></li>
 		<li><a href="change_password.php"><i class="material-icons">mode_edit</i>Password</a></li>
 		<li><div class="divider"></div></li>
 		<li><a href="reservations_list.php"><i class="material-icons">format_list_numbered</i>Orders List</a></li>
-=======
-		<li><a href="edit_account.php"><i class="material-icons">mode_edit</i>Edit account</a></li>
-		<li><div class="divider"></div></li>
-		<li><a href="change_password.php"><i class="material-icons">mode_edit</i>Change Password</a></li>
-		<li><div class="divider"></div></li>
-		<li><a href="#"><i class="material-icons">format_list_numbered</i>Orders List</a></li>
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
-	  	<li><div class="divider"></div></li>
-		<li><a href="#"><i class="material-icons">info</i>Opinions</a></li>
 		<li><div class="divider"></div></li>
 		<li><a href="map.php"><i class="material-icons">map</i>Map</a></li>
 		<li><div class="divider"></div></li>
