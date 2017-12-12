@@ -9,7 +9,7 @@
 				<div class="row">
 					<!-- dividing header into two sections: logo and menu -->
 					<div class="col s2 center-align">
-						<span><img src="images/logo/logo.png" class="logo"></span>
+						<span><a href="index.php"><img src="images/logo/logo.png" class="logo"></a></span>
 					</div>
 					<?php 
 						if( $session_admin->is_logged_in() ) {

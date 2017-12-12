@@ -12,5 +12,6 @@
 
    <!--Let browser know website is optimized for mobile-->
    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <script src="https://use.fontawesome.com/fcc8a4e322.js"></script>
 </head>
 <body>
