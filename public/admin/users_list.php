@@ -21,14 +21,15 @@
 	
 	<div class="row">
 		<div class="s12 center-align">
-			<h1 class="users-list-title teal-text lighten-2"> List of Users </h1>
-			<p><?php echo isset($message_admin) ? display_message_errors($message_admin) : ""; ?></p>
+			
 		</div>
 	</div>
 
 	<div class="row">
- 		<div class="col s12 table-container">
-    	<table class="responsive-table bordered">
+ 		<div class="col s12 m10 offset-m1">
+    	<h1 class="users-list-title teal-text lighten-2 font-h1 center-align"> List of Users </h1>
+      <p><?php echo isset($message_admin) ? display_message_errors($message_admin) : ""; ?></p>
+      <table class="responsive-table bordered">
         <thead>
           <tr>
               <th>ID</th>
