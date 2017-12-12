@@ -12,7 +12,6 @@ require_once("../../includes/initialize.php");
 	}
 
 	$restaurant = Restaurant::find_by_id($_SESSION['restaurant_id']);
-<<<<<<< HEAD
 	$table = Table::find_by_restaurant_id($restaurant->restaurant_id);
 	$available_tables = Table::find_available_by_restaurant_id($restaurant->restaurant_id);
 
@@ -27,7 +26,7 @@ require_once("../../includes/initialize.php");
 		$six_seats = $database->escape_value($_POST['six_seats']);
 
 
-		if( !isset($table->restaurant_id) ){
+		if( !isset($available_tables->restaurant_id) ){
 			if( Table::insert_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
 				if( $table->add_available_tables() ){
 					$message_restaurant = "Your tables are updated.";
@@ -43,11 +42,6 @@ require_once("../../includes/initialize.php");
 				}
 			}
 		}
-=======
-	
-?>
-<?php include("../layouts/header/restaurant_header_menu.php"); ?>
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 
 		// submiting caption
 	}	else if( isset($_POST['submit_caption']) ){
@@ -68,11 +62,7 @@ require_once("../../includes/initialize.php");
 <?php include("../layouts/header/restaurant_header_menu.php"); ?>
 	<div class="row">
 		<div class="col s12 center-align">
-<<<<<<< HEAD
 			<h3 class="restaurant-panel-message"><?php echo display_message_errors($message_restaurant); ?></h3>
-=======
-			<h3 class="restaurant-panel-message"><?php echo display_message_errors($session_restaurant->message_restaurant); ?></h3>
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 			<h1 class="teal-text darken-2 restaurant-title">Hello, <?php echo $restaurant->name; ?>!</h1>
 			<h2 class="restaurant-subtitle">Here is your panel.</h2>
 		</div>
@@ -101,7 +91,7 @@ require_once("../../includes/initialize.php");
 	
 	<div class="row">
 		<div class="col s12 m8 offset-m2">
-	<table class="centered responsive-table striped">
+	<table class="centered striped">
         <thead>
           <tr>
               <th>Displays</th>
@@ -125,7 +115,7 @@ require_once("../../includes/initialize.php");
 	<div class="row">
 		<div class="col s12 m8 offset-m2">
 		<h2 class="teal-text darken-2 center-align" style="font-size: 2em">Available Tables</h2>
-	<table class="centered responsive-table striped">
+	<table class="centered striped">
         <thead>
           <tr>
               <th>1 seat table</th>
@@ -139,12 +129,12 @@ require_once("../../includes/initialize.php");
 
         <tbody>
           <tr>
-          	<td><?php echo isset($table->one_seat) ? htmlentities($available_tables->one_seat) : "0"; ?></td>
-          	<td><?php echo isset($table->two_seats) ? htmlentities($available_tables->two_seats) : "0"; ?></td>
-          	<td><?php echo isset($table->three_seats) ? htmlentities($available_tables->three_seats) : "0"; ?></td>
-          	<td><?php echo isset($table->four_seats) ? htmlentities($available_tables->four_seats) : "0"; ?></td>
-          	<td><?php echo isset($table->five_seats) ? htmlentities($available_tables->five_seats) : "0"; ?></td>
-          	<td><?php echo isset($table->six_seats) ? htmlentities($available_tables->six_seats) : "0"; ?></td>
+          	<td><?php echo isset($available_tables->one_seat) ? htmlentities($available_tables->one_seat) : "0"; ?></td>
+          	<td><?php echo isset($available_tables->two_seats) ? htmlentities($available_tables->two_seats) : "0"; ?></td>
+          	<td><?php echo isset($available_tables->three_seats) ? htmlentities($available_tables->three_seats) : "0"; ?></td>
+          	<td><?php echo isset($available_tables->four_seats) ? htmlentities($available_tables->four_seats) : "0"; ?></td>
+          	<td><?php echo isset($available_tables->five_seats) ? htmlentities($available_tables->five_seats) : "0"; ?></td>
+          	<td><?php echo isset($available_tables->six_seats) ? htmlentities($available_tables->six_seats) : "0"; ?></td>
           </tr>
         </tbody>
       </table>
@@ -154,7 +144,7 @@ require_once("../../includes/initialize.php");
   <div class="row">
 		<div class="col s12 m8 offset-m2">
 		<h3 class="teal-text darken-2 center-align" style="font-size: 2em">Tables</h3>
-	<table class="centered responsive-table striped">
+	<table class="centered striped">
         <thead>
           <tr>
               <th>1 seat table</th>
@@ -184,70 +174,74 @@ require_once("../../includes/initialize.php");
 	<br />
 
 	<div class="row">
-	<div class="col s8 offset-s2 s6">
-	<h4 class="teal-text darken-2 center-align" style="font-size: 2em;">Edit your tables</h4>
+		<div class="col s8 offset-s2 s6">
+		
+		<div class="col s12 center-align" style="padding: 1em 0 1em 0;">
+			<button id="edit-tables-button" class="btn">Click me to Edit tables</button>
+		</div>
+		<div class="edit-tables-form-hidden" id="edit-tables-container">
+		<form action="index.php" method="post">
 
-	<form action="index.php" method="post">
-
-	<div class="input-field col s12 m6">
-    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">1 seat table</p>
-    <select name="one_seat">
-      <?php for( $a = 0; $a <= 6; $a++) { ?>
-      <option value="<?php echo $a; ?>" <?php echo $table->one_seat == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
-      <?php } ?>
-    </select>
-  </div>
-
-  <div class="input-field col s12 m6">
-    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">2 seats table</p>
-    <select name="two_seats">
-      <?php for( $a = 0; $a <= 6; $a++) { ?>
-      <option value="<?php echo $a; ?>" <?php echo $table->two_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
-      <?php } ?>
-    </select>
-  </div>
-
-  <div class="input-field col s12 m6">
-    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">3 seats table</p>
-    <select name="three_seats">
-      <?php for( $a = 0; $a <= 6; $a++) { ?>
-      <option value="<?php echo $a; ?>" <?php echo $table->three_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
-      <?php } ?>
-    </select>
-  </div>
-
-  <div class="input-field col s12 m6">
-    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">4 seats table</p>
-    <select name="four_seats">
-      <?php for( $a = 0; $a <= 6; $a++) { ?>
-      <option value="<?php echo $a; ?>" <?php echo $table->four_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
-      <?php } ?>
-    </select>
-  </div>
-
-  <div class="input-field col s12 m6">
-    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">5 seats table</p>
-    <select name="five_seats">
-      <?php for( $a = 0; $a <= 6; $a++) { ?>
-      <option value="<?php echo $a; ?>" <?php echo $table->five_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
-      <?php } ?>
-    </select>
-  </div>
-
-  <div class="input-field col s12 m6">
-    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">6 seats table</p>
-    <select name="six_seats">
-      <?php for( $a = 0; $a <= 6; $a++) { ?>
-      <option value="<?php echo $a; ?>" <?php echo $table->six_seats == $a ? "selected" : "" ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
-      <?php } ?>
-    </select>
-  </div>
-
-	  <div class="input-field col s12 center-align">
-			<input type="submit" name="submit_tables" id="submit_tables" class="btn" value="Submit">
+		<div class="input-field col s12 m6">
+	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">1 seat table</p>
+	    <select name="one_seat">
+	      <?php for( $a = 0; $a <= 6; $a++) { ?>
+	      <option value="<?php echo $a; ?>" <?php echo $table->one_seat == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <?php } ?>
+	    </select>
 	  </div>
-  </form>
-  </div>
+
+	  <div class="input-field col s12 m6">
+	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">2 seats table</p>
+	    <select name="two_seats">
+	      <?php for( $a = 0; $a <= 6; $a++) { ?>
+	      <option value="<?php echo $a; ?>" <?php echo $table->two_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <?php } ?>
+	    </select>
+	  </div>
+
+	  <div class="input-field col s12 m6">
+	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">3 seats table</p>
+	    <select name="three_seats">
+	      <?php for( $a = 0; $a <= 6; $a++) { ?>
+	      <option value="<?php echo $a; ?>" <?php echo $table->three_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <?php } ?>
+	    </select>
+	  </div>
+
+	  <div class="input-field col s12 m6">
+	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">4 seats table</p>
+	    <select name="four_seats">
+	      <?php for( $a = 0; $a <= 6; $a++) { ?>
+	      <option value="<?php echo $a; ?>" <?php echo $table->four_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <?php } ?>
+	    </select>
+	  </div>
+
+	  <div class="input-field col s12 m6">
+	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">5 seats table</p>
+	    <select name="five_seats">
+	      <?php for( $a = 0; $a <= 6; $a++) { ?>
+	      <option value="<?php echo $a; ?>" <?php echo $table->five_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <?php } ?>
+	    </select>
+	  </div>
+
+	  <div class="input-field col s12 m6">
+	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">6 seats table</p>
+	    <select name="six_seats">
+	      <?php for( $a = 0; $a <= 6; $a++) { ?>
+	      <option value="<?php echo $a; ?>" <?php echo $table->six_seats == $a ? "selected" : "" ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <?php } ?>
+	    </select>
+	  </div>
+
+		  <div class="input-field col s12 center-align">
+				<input type="submit" name="submit_tables" id="submit_tables" class="btn" value="Submit">
+		  </div>
+	  </form>
+	  </div>
+	  </div>
   </div>
 
   <br />
