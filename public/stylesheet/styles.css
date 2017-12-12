@@ -84,16 +84,11 @@
 
 	/*button of choice*/
 	.choice-h1{
-<<<<<<< HEAD
 		font-size: 3.5em;
-=======
-		font-size: 4em;
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	}
 
 	.choice-general {
-		opacity: .9;
-		background-color: #e65100;
+		background-color: #fb8c00;
 		color: white;
 		padding: .2em 1em;
 		border-radius: 5px;
@@ -103,7 +98,6 @@
 		font-size: 2em;
 	}
 
-<<<<<<< HEAD
 	@media screen and ( max-width:480px ) {
 		.choice-h1 {
 			font-size: 1.5em;
@@ -134,11 +128,9 @@
 		}
 	}
 
-=======
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	.choice-text {
 		padding: .2em .6em;
-		background-color: #ef6c00;
+		background-color:#fb8c00;
 		color: white;
 		border-radius: 8px;
 	}
@@ -207,7 +199,7 @@
 		padding: 1 1em;
 	}
 
-	#section2 {
+	.section2 {
 		padding: 1em 0 1em 0;
 		margin-top: 2em;
 		background-color: white;
@@ -242,13 +234,11 @@
 }
 
 .restaurant-link {
-	margin-left: 1em;
-	font-weight: bold;
-	color: red;
+	font-weight: bold
+	color: #00796b;
 	text-decoration: none;
 }
 
-<<<<<<< HEAD
 	/*restaurants secion*/
 .restaurants-filter {
 	position: absolute;
@@ -276,9 +266,6 @@
 .card-caption {
 	font-size: 1.1em;
 }
-=======
-	
->>>>>>> 1cf87af73e977cad5d503bddc039ab5c175268b7
 	
 .card-address {
 	padding-left: 1em;
@@ -372,6 +359,16 @@
 /*chosen restaurant*/
 .table-title {
 	font-size: 2em;
+}
+
+/*footer*/
+.page-footer {
+	background-color: #fb8c00;
+	margin-top: 4em;
+}
+
+.footer-copyright {
+	background-color: black;
 }
 
 	
