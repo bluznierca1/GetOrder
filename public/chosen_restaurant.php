@@ -20,6 +20,7 @@
 	// $if = $reservation->check_time($restauranta->restaurant_id);
 	$reservations = Reservation::find_by_sql("SELECT * FROM reservation WHERE restaurant_id = {$restauranta->restaurant_id} ");
 	if ( $reservation->check_reservation_time($reservations, $restauranta->restaurant_id) ){
+		redirect_to("chosen_restaurant.php?restaurant_id={$restauranta->restaurant_id}");
 		$message_user = "Tables are updated.";
 	}
 	
@@ -37,7 +38,7 @@
 			$reservation->date_out = $today . " " . $date_out; // f. ex. 23:08
 			$reservation->restaurant_id = $database->escape_value($restauranta->restaurant_id);
 			$reservation->booked_table = $database->escape_value($_POST['table']);
-			$reservation->created = date("Y-m-d H:i:s", time() +3600); // cause there is GMT +00
+			$reservation->created = date("Y-m-d H:i:s", time() ); // cause there is GMT +00
 
 			//checking if chosen time is right
 			if( strtotime($reservation->date_in) > (strtotime($restauranta->open_to) - 7200 ) ){
@@ -124,6 +125,8 @@
 	<br />
 	
 	<?php 
+		// checking if there is user session on
+		// if not - no option for booking tables
 		if( isset($user->user_id) ) {
 	 		if( !$reservation->user_has_reservation($user->user_id, $restauranta->restaurant_id)) { ?>
 			  <div class="row">
@@ -160,11 +163,18 @@
 				</div>
 	<?php // end of if( !$reservation->user_has_reservation($user->user_id, $restauranta->restaurant_id))
 			} else {
-				echo "<h3 class=\"red-text darken-2 center-align\">Not able to reserve.</h3>";
-				echo "<h4 class=\"teal-text darken-2 center-align font-h4\">You have already made reservation for that restaurant.
+			?>
+				<h3 class="red-text darken-2 center-align">Not able to reserve.</h3>
+				<h4 class="teal-text darken-2 center-align font-h4">You have already made reservation for that restaurant.
 					Remove existing one to be able to reserve again. <br />
-					<p><a href=\"#\">Go to Reservations</a></p> </h4>";
-			}
+					<p><a href="user/reservations_list.php">Go to Reservations</a></p> </h4>
+		<?php }
+		} else { // end of user session on
+		?>
+			<h3 class="red-text text-red-darken-2 font-h3 center-align">
+				You need to be registered as user to book a table.
+			</h3>
+		<?php
 		}
 	 ?>			
 
