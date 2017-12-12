@@ -36,8 +36,7 @@ span.buton-collapse-close {
 }
 
 .table-container {
-	width: 80%;
-	margin: 0 auto;
+	
 }
 
 .admin-title {
@@ -64,8 +63,17 @@ span.buton-collapse-close {
 }
 
 .restaurant-link {
-	margin-left: 1em;
-	font-weight: bold;
-	color: red;
+	font-weight: bold
+	color: #00796b;
 	text-decoration: none;
+}
+
+/*footer*/
+.page-footer {
+	background-color: #fb8c00;
+	margin-top: 2em;
+}
+
+.footer-copyright {
+	background-color: black;
 }
