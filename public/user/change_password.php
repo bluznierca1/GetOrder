@@ -43,30 +43,28 @@
 <?php include("../layouts/header/user_header_menu.php"); ?>
 
 	<div class="row">
-		<div class="s12 center-align">
-			<h1 class="teal-text darken-2">Edit Account </h1>
-		</div>
-	</div>
-
-	<div class="row">
-		<?php echo isset($message_user) ? display_message_errors($message_user) : ""; ?>
-		<form class="s12 edit-form" method="post" action="change_password.php">
-			<div class="input-field col s12 m6">
-				<input type="password" id="new_password" name="new_password" class="validate" value="" placeholder="New password">
-				<label for="new_password">New password</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<input type="password" name="confirm_password" class="validate" id="confirm_password" value="" placeholder="Confirm new password">
-				<label for="confirm_password">Confirm Password</label>
-			</div>
-			<div class="input-field col s12 m6">
-				<input type="password" name="old_password" class="validate" value="" placeholder="Your old password">
-				<label for="old_password">Confirm Password</label>
-			</div>
-			<div class="input-field col s12 right-align">
-				<input type="submit" id="old_password" name="submit" class="waves-effect waves-light btn" value="Submit">
-			</div>
-		</form>
+		<div class="col s12 m10 offset-m1">
+			<h1 class="teal-text darken-2 center-align font-h1">Change Password</h1>
+			<?php echo isset($message_user) ? display_message_errors($message_user) : ""; ?>
+			<br />
+			<br />
+			<form class="edit-form" method="post" action="change_password.php">
+				<div class="input-field col s12 m6">
+					<input type="password" id="new_password" name="new_password" class="validate" value="" placeholder="New password">
+					<label for="new_password">New password</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input type="password" name="confirm_password" class="validate" id="confirm_password" value="" placeholder="Confirm new password">
+					<label for="confirm_password">Confirm New Password</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<input type="password" name="old_password" class="validate" value="" placeholder="Current password">
+					<label for="old_password">Current Password</label>
+				</div>
+				<div class="input-field col s12 center-align">
+					<input type="submit" id="old_password" name="submit" class="waves-effect waves-light btn" value="Submit">
+				</div>
+			</form>
 	</div>
 
 
