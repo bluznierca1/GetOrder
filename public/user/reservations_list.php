@@ -13,10 +13,18 @@
 	}
 
 	$user = User::find_by_id($_SESSION['user_id']);
+
+	// Checking if there are reservations that are done
+	$reservations = Reservation::find_by_sql("SELECT * FROM reservation WHERE user_id = {$user->user_id} ");
+	if ( $reservation->check_reservation_time($reservations, $user->user_id) ){
+		redirect_to("reservations_list.php");
+		$message_user = "Tables are updated.";
+	}
+
 	// looking for following reservations
 	$reservations = Reservation::find_by_sql("SELECT * FROM reservation WHERE user_id = {$user->user_id} ORDER BY date_in ASC");
 	// looking for all reservations 
-	$all_reservations = Reservation::find_by_sql("SELECT * FROM display_reservations WHERE user_id = {$user->user_id} ORDER BY date_in ASC");
+	$all_reservations = Reservation::find_by_sql("SELECT * FROM display_reservations WHERE user_id = {$user->user_id} ORDER BY date_in DESC");
 ?>
 
 <?php include("../layouts/header/user_header_menu.php"); ?>
@@ -28,7 +36,7 @@
 	<div class="row">
 		<div class="col s12 m8 offset-m2">
 			<?php if( !empty($reservations) ){ ?>
-				<h2 class="teal-text darken-2 center-align font-h2">Following</h2>
+				<h2 class="teal-text darken-2 center-align font-h2">Today</h2>
 				<table class="centered stripped">
 					<thead>
 						<tr>
@@ -57,6 +65,10 @@
 					</tbody>
 				<?php } ?>
 			</table>
+			<?php // option for case there are no reservations for today
+				} else { 
+			?>
+					<h2 class="orange-text darken-2 center-align font-h2">No reservations for today :(</h2>
 			<?php } ?>
 		</div>
 	</div>
@@ -75,7 +87,6 @@
 							<th>Time</th>
 							<th>Table's seats</th>
 							<th>Created</th>
-							<th>Remove</th>
 						</tr>
 					</thead>
 
@@ -91,7 +102,6 @@
 							<td><?php echo $done_reservation->date_in; ?></td>
 							<td><?php echo $done_reservation->booked_table; ?></td>
 							<td><?php echo $done_reservation->created; ?></td>
-							<td><a href="#" style="color: red;"><i class="material-icons">remove</i></a></td>
 						</tr>
 					</tbody>
 				<?php } ?>
