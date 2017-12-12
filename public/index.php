@@ -3,22 +3,14 @@
 
 	<main role="main" id="main">
 		<section id="section1">
-		<div class="row">
-			<div class="col s3 right-align">
-				<i class="material-icons arrow-down"><span class="teal-text darken-1">arrow_downward</span></i>
-			</div>
-				
-				<div class="col s6 center-align">
-					<h3 class="how-it-works"><span class="teal-text darken-1">How does it work?</span></h3>
+		<div class="row">				
+				<div class="col s12 center-align">
+					<h3 class="how-it-works teal-text text-darken-2 center-align font-h3">How does it work?</span></h3>
 				</div>
-
-			<div class="col s3 left-align">
-				<i class="material-icons arrow-down"><span class="teal-text darken-1">arrow_downward</span></i>
-			</div>
 		</div>
 		</section>
 
-		<section id="section2">
+		<section id="section2" class="section2">
 			<div class="row">
 				<div class="col hide-on-small-only m4 center-align ">
 					<img src="images/steps/first.png" class="responsive-img stopka">
@@ -29,13 +21,13 @@
 				<div class="col hide-on-small-only m4 center-align ">
 					<img src="images/steps/second.png" class="responsive-img stopka">
 					<div class="step-description">
-						<h5><span class="teal-text darken-1">2. Book a table</span></h5>	
+						<h5><span class="teal-text darken-1">2. Book a table for today</span></h5>	
 					</div>
 				</div>
 				<div class="col hide-on-small-only m4 center-align ">
 					<img src="images/steps/fourth.png" class="responsive-img stopka">
 					<div class="step-description">
-						<h5><span class="teal-text darken-1">4. Come and enjoy without waiting!</span></h5>	
+						<h5><span class="teal-text darken-1">4. Come and enjoy!</span></h5>	
 					</div>
 				</div>
 			</div>
