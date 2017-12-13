@@ -2,10 +2,10 @@
 	require_once("../../includes/initialize.php");
 	
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to restaurant panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to restaurant panel.");
 		redirect_to("../admin/index.php");
 	} else if( $session_user->is_logged_in() ){
-		$message_user = "You are logged in as User. Can not go to restaurant panel.";
+		$session_user->message("You are logged in as User. Can not go to restaurant panel.");
 		redirect_to("../user/index.php");
 	} else if (!$session_restaurant->is_logged_in() ){
 		redirect_to("login.php");
@@ -22,10 +22,10 @@
 		$phone_number = $database->escape_value(trim($_POST['phone_number']));
 
 		if( $restaurant->edit($name, $email, $city, $street, $number, $phone_number, $restaurant->restaurant_id) ){
-			$message_restaurant = "Account has been edited.";
+			$session_restaurant->message("Account has been edited.");
 			redirect_to("index.php");
 		} else {
-			$message_restaurant = "Something went wrong. ";
+			$session_restaurant->message("Something went wrong.");
 			$redirect_to("index.php");
 		}
 
@@ -40,7 +40,8 @@
 			<h1 class="teal-text darken-2">Edit Account</h1>
 		</div>
 	</div>
-
+	
+	<?php echo isset($session_restaurant->message_restaurant) ? $session_restaurant->message_restaurant : ""; ?>
 	<div class="row">
 		<form class="s12 edit-form" role="form" action="edit_account.php" method="post">
 			<div class="col s12 m6 input-field">

@@ -3,13 +3,12 @@
 <?php 
 
 	if ( !$session_admin->is_logged_in() ){
-		$message_admin = "You are not logged in. Just do it.";
 		redirect_to("login.php");
 	} else if( $session_user->is_logged_in() ){
-		$message_user = "You are logged in as User. Can not go to Admin panel.";
+		$session_user->message("You are logged in as User. Can not go to Admin panel.");
 		redirect_to("../user/index.php");
 	} else if ($session_restaurant->is_logged_in() ){
-		$message_restaurant = "You are logged in as Restaurant. Can not go to admin panel.";
+		$session_restaurant->message("You are logged in as Restaurant. Can not go to admin panel.");
 		redirect_to("../restaurant/index.php");
 	}
 
@@ -23,15 +22,15 @@
 		
 	if( $restaurant ){
 		if( Restaurant::insert_into_markers($restaurant, $lat, $lng) ){
-			$_SESSION['admin_message'] = "Restaurant: {$restaurant->name} is now on the map!";
+			$session_admin->message("Restaurant: {$restaurant->name} is now on the map!");
 			redirect_to("restaurants_list.php"); 
 			
 		} else {
-			$_SESSION['admin_message'] = "Something went wrong. Try again.";
+			$session_admin->message("Something went wrong. Try again.");
 			redirect_to("restaurants_list.php");
 		}
 	} else {
-		$_SESSION['admin_message'] = "Restaurant could not be found.";
+		$session_admin->message("Restaurant could not be found.");
 			redirect_to("restaurants_list.php");
 	}		
 	}

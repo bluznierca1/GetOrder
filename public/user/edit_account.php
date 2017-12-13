@@ -2,12 +2,12 @@
 
 <?php 
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to user panel.");
 		redirect_to("../admin/index.php");
 	} else if( !$session_user->is_logged_in() ){
 		redirect_to("login.php");
 	} else if ($session_restaurant->is_logged_in() ){
-		$message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
+		$session_restaurant->message("You are logged in as Restaurant. Can not go to user panel.");
 		redirect_to("../restaurant/index.php");
 	}
 ?>
@@ -21,10 +21,10 @@
 		$email = $database->escape_value(trim($_POST['email']));
 
 		if( $user->edit($username, $first_name, $last_name, $email, $user->user_id) ){
-			$message_user = "You account has been edited.";
+			$session_user->message("You account has been edited.");
 			redirect_to("index.php");
 		} else {
-			$message_user = "Something went wrong.";
+			$session_user->message("Something went wrong.");
 			$redirect_to("index.php");
 		}
 

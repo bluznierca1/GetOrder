@@ -4,13 +4,13 @@
 <?php
 
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to user panel.");
 		redirect_to("../admin/index.php");
 	} else if( $session_user->is_logged_in() ){
-		$message_user = "You are logged in as User. Can not go to restaurant panel.";
+		$session_user->message("You are logged in as User. Can not go to restaurant panel.");
 		redirect_to("../user/index.php");
 	} else if ($session_restaurant->is_logged_in() ){
-		$message_restaurant = "Can not register when you are logged in.";
+		$session_restaurant->message("Can not register when you are logged in.");
 		redirect_to("index.php");
 	}
 
@@ -46,14 +46,14 @@
 			if( !$restaurant->username_exists($restaurant->username) ) {
 				if ( !$restaurant->email_exists($restaurant->email) ){
 					$restaurant->save();
-					$message_restaurant = "Registered. Time to log in.";
+					$_SESSION['restaurant_message'] = "Registered. Time to log in.";
 					redirect_to("login.php");
 					// $message_restaurant = $restaurant->save();
 				} else {
-					$message_restaurant = "This email is taken. Use another.";
+					$_SESSION['restaurant_message'] = "This email is taken. Use another.";
 				}
 			} else {
-				$message_restaurant = "User with that username exists. Use another.";
+				$_SESSION['restaurant_message'] = "User with that username exists. Use another.";
 			}
 		} else {
 			$message_restaurant = "";

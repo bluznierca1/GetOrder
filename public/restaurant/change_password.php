@@ -3,10 +3,10 @@
 <?php 
 	
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to user panel.");
 		redirect_to("../admin/index.php");
 	} else if( $session_user->is_logged_in() ){
-		$message_user = "You are logged in as User. Can not go to restaurant panel.";
+		$session_user->message("You are logged in as User. Can not go to restaurant panel.");
 		redirect_to("../user/index.php");
 	} else if (!$session_restaurant->is_logged_in() ){
 		redirect_to("index.php");
@@ -27,14 +27,14 @@
 		if( $old_password == $restaurant->password ){
 			if( $new_password == $confirm_password ){
 				if( Restaurant::edit_password($new_password, $restaurant->restaurant_id) ){
-					$message_restaurant = "Your password has got changed.";
+					$session_restaurant->message("Your password has got changed.");
 					redirect_to("index.php");
 				}
 			} else {
-				$message_restaurant = "Passwords do not match.";
+				$session_restaurant->message("Passwords do not match.");
 			}
 		} else {
-			$message_restaurant = "Your old password is wrong.";
+			$session_restaurant->message("Your old password is wrong.");
 		}
 	}
 
@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo isset($message_restaurant) ? display_message_errors($message_restaurant) : ""; ?>
+		<?php echo isset($session_restaurant->message_restaurant) ? display_message_errors($session_restaurant->message_restaurant) : ""; ?>
 		<form class="s12 edit-form" method="post" action="change_password.php">
 			<div class="input-field col s12 m6">
 				<input type="password" id="new_password" name="new_password" class="validate" value="" placeholder="New password">

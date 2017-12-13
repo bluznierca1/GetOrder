@@ -3,12 +3,12 @@
 <?php 
 	
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to user panel.");
 		redirect_to("../admin/index.php");
 	} else if( !$session_user->is_logged_in() ){
 		redirect_to("login.php");
 	} else if ($session_restaurant->is_logged_in() ){
-		$message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
+		$session_restaurant->message("You are logged in as Restaurant. Can not go to user panel.");
 		redirect_to("../restaurant/index.php");
 	}
 	
@@ -27,14 +27,14 @@
 		if( $old_password == $user->password ){
 			if( $new_password == $confirm_password ){
 				if( User::edit_password($new_password, $user->user_id) ){
-					$message_user = "Your password has got changed.";
+					$session_user->message("Your password has got changed.");
 					redirect_to("index.php");
 				}
 			} else {
-				$message_user = "Passwords do not match.";
+				$session_user->message("Passwords do not match.");
 			}
 		} else {
-			$message_user = "Your old password is wrong.";
+			$session_user->message("Your old password is wrong.");
 		}
 	}
 

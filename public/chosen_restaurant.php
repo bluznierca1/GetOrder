@@ -20,8 +20,8 @@
 	// $if = $reservation->check_time($restauranta->restaurant_id);
 	$reservations = Reservation::find_by_sql("SELECT * FROM reservation WHERE restaurant_id = {$restauranta->restaurant_id} ");
 	if ( $reservation->check_reservation_time($reservations, $restauranta->restaurant_id) ){
+		$session_user->message("Tables are updated.");
 		redirect_to("chosen_restaurant.php?restaurant_id={$restauranta->restaurant_id}");
-		$message_user = "Tables are updated.";
 	}
 	
 	if( isset($_POST['submit']) ){

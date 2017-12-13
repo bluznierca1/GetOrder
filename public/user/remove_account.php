@@ -2,17 +2,17 @@
 require_once("../../includes/initialize.php");
 	
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to user panel.");
 		redirect_to("../admin/index.php");
 	} else if( !$session_user->is_logged_in() ){
 		redirect_to("login.php");
 	} else if ($session_restaurant->is_logged_in() ){
-		$message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
+		$session_restaurant->message("You are logged in as Restaurant. Can not go to user panel.");
 		redirect_to("../restaurant/index.php");
 	}
 	
 	if( !isset($_GET['user_id']) ){
-		$message_user = "No id given. ";
+		$session_user->message("No id given.");
 		redirect_to("index.php");
 	}
 

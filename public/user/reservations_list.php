@@ -3,12 +3,12 @@
 <?php 
 	
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to user panel.";
+		$session_user->message("You are logged in as Admin. Can not go to user panel.");
 		redirect_to("../admin/index.php");
 	} else if( !$session_user->is_logged_in() ){
 		redirect_to("login.php");
 	} else if ($session_restaurant->is_logged_in() ){
-		$message_restaurant = "You are logged in as Restaurant. Can not go to user panel.";
+		$session_restaurant->message("You are logged in as Restaurant. Can not go to user panel.");
 		redirect_to("../restaurant/index.php");
 	}
 
@@ -17,8 +17,8 @@
 	// Checking if there are reservations that are done
 	$reservations = Reservation::find_by_sql("SELECT * FROM reservation WHERE user_id = {$user->user_id} ");
 	if ( $reservation->check_reservation_time($reservations, $user->user_id) ){
+		$session_user->message("Tables are updated.");
 		redirect_to("reservations_list.php");
-		$message_user = "Tables are updated.";
 	}
 
 	// looking for following reservations

@@ -40,12 +40,12 @@
 	</div>
 	
 	<?php foreach($restaurants as $restaurant ){ ?>
-	
+		<?php $logo = Logo::find_by_restaurant_id($restaurant->restaurant_id); ?>
 		<div class="row">
 		  <div class="col s12 m8 offset-m3 restaurant-card">
 		    <div class="card horizontal">
 		      <div class="card-image responsive-img" style="height: auto;">
-		        <img src="images/stary_mlyn.jpg" class="card-image">
+		        <img src="logo/<?php echo $logo->filename; ?>" class="card-image">
 		      </div>
 		      <div class="card-stacked">
 		        <div class="card-content">

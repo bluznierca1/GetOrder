@@ -2,10 +2,10 @@
 require_once("../../includes/initialize.php");
 	
 	if ( $session_admin->is_logged_in() ){
-		$message_admin = "You are logged in as Admin. Can not go to restaurant panel.";
+		$session_admin->message("You are logged in as Admin. Can not go to restaurant panel.");
 		redirect_to("../admin/index.php");
 	} else if( $session_user->is_logged_in() ){
-		$message_user = "You are logged in as User. Can not go to restaurant panel.";
+		$session_user->message("You are logged in as User. Can not go to restaurant panel.");
 		redirect_to("../user/index.php");
 	} else if (!$session_restaurant->is_logged_in() ){
 		redirect_to("login.php");
@@ -14,7 +14,7 @@ require_once("../../includes/initialize.php");
 	$restaurant = Restaurant::find_by_id($_SESSION['restaurant_id']);
 	$table = Table::find_by_restaurant_id($restaurant->restaurant_id);
 	$available_tables = Table::find_available_by_restaurant_id($restaurant->restaurant_id);
-
+	$logo = Logo::find_by_restaurant_id($restaurant->restaurant_id);
 
 	// Submiting tables
 	if( isset($_POST['submit_tables']) ){
@@ -29,15 +29,15 @@ require_once("../../includes/initialize.php");
 		if( !isset($available_tables->restaurant_id) ){
 			if( Table::insert_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
 				if( $table->add_available_tables() ){
-					$message_restaurant = "Your tables are updated.";
+					$session_restaurant->message("Your tables are updated.");
 				}
 			} else {
-				$message_restaurant = "Something went wrong.";
+				$session_restaurant->message("Something went wrong.");
 			}
 		} else {
 			if( Table::edit_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
 				if( $table->edit_available_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
-					$message_restaurant = "Your tables are updated.";
+					$session_restaurant->message("Your tables are updated.");
 					redirect_to("index.php");
 				}
 			}
@@ -48,32 +48,58 @@ require_once("../../includes/initialize.php");
 		$caption = $database->escape_value($_POST['caption']);
 
 		if( Restaurant::edit_caption($caption, $restaurant->restaurant_id) ){
-			$message_restaurant = "Your caption has been edited.";
+			$session_restaurant->message("Your caption has been edited.");
 			redirect_to("index.php");
 		} else {
 			$message_restaurant = "Something went wrong. Try again.";
 			redirect_to("index.php");
 		}
+
+		// submiting logo
 	} else if ( isset($_POST['submit_logo']) ){
-		
+		$max_file_size = 1048576; // expressed in bytes
+	
+		$logo = new Logo();
+		$logo->restaurant_id = $restaurant->restaurant_id;
+		$logo->attach_file($_FILES['file_upload']);
+		if($logo->save() ){
+			//Success
+			$session_restaurant->message("Your photo was uploaded successfully.");
+			redirect_to("index.php");
+		} else {
+			// Failure
+			$message_restaurant = join("<br /> ", $logo->errors);
+		}
+	}
+		// Removing existing logo
+	else if (isset($_POST['submit_destroy']) ){
+		$logo = Logo::find_by_restaurant_id($restaurant->restaurant_id);
+			if( $logo && $logo->destroy() ){
+				$session_restaurant->message("Photo {$photo->filename} was deleted.");
+				redirect_to("index.php");
+			} else {
+				$session_restaurant->message("The photo could not be removed.");
+				redirect_to("index.php");
+			}
 	}
 	
 ?>
+
 <?php include("../layouts/header/restaurant_header_menu.php"); ?>
+
 	<div class="row">
 		<div class="col s12 center-align">
-			<h3 class="restaurant-panel-message"><?php echo display_message_errors($message_restaurant); ?></h3>
+			<h3 class="restaurant-panel-message"><?php echo display_message_errors($session_restaurant->message_restaurant); ?></h3>
 			<h1 class="teal-text darken-2 restaurant-title">Hello, <?php echo $restaurant->name; ?>!</h1>
 			<h2 class="restaurant-subtitle">Here is your panel.</h2>
 		</div>
 	</div>
 	<br />
-
 	<div class="row">
-		<div class="col s12 m8 offset-m2 restaurant-card">
+		<div class="col s12 m6 offset-m3 restaurant-card">
 		  <div class="card horizontal">
 		    <div class="card-image responsive-img" style="height: auto;">
-		      <img src="images/stary_mlyn.jpg" class="card-image">
+		      <img src="../logo/<?php echo $logo->filename; ?>" class="card-image" alt="logo">
 		    </div>
 		    <div class="card-stacked">
 		      <div class="card-content">
@@ -245,27 +271,53 @@ require_once("../../includes/initialize.php");
   </div>
 
   <br />
+  <div class="divider"></div>
   <br />
 	
 	<!-- // Make it depended on if link to logo exists -->
+	<?php 
+		if( isset($logo->filename) ){
+	?>
+		<div class="row">
+			<div class="col s12 m8 offset-m2">	
+				<h3 class="center-align font-h3 orange-text text-darken-2">
+					You already have uploaded logo. Remove current to upload new one.
+				</h3>
+					<form action="index.php" method="post">
+						<div class="input-field center-align col s12">
+							<input type="submit" name="submit_destroy" class="btn" value="Remove">
+						</div>
+					</form>
+			</div>
+		</div>	 
+	<?php
+		} else {
+	?>
 	<div class="row">
 		<div class="col s12 m8 offset-m2">
 			<h5 class="file-input-title center-align teal-text darken-2">Upload Logo</h5>
-			<form action="#">
-		    <div class="file-field input-field">
-		      <div class="btn">
-		        <span>File</span>
-		        <input type="file">
-		      </div>
-		      <div class="file-path-wrapper">
-		        <input class="file-path validate" type="text">
-		      </div>
-		    </div>
-		  </form>
+
+	<form action="index.php" method="post" enctype="multipart/form-data">
+    <div class="file-field input-field">
+      <div class="btn orange darken-2">
+        <span>File</span>
+        <input type="file" name="file_upload">
+      </div>
+      <div class="file-path-wrapper">
+      	<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <div class="col s12 center-align">
+    	<input type="submit" name="submit_logo" value="Upload" class="btn">
+    </div>
+  </form>
+	<?php } ?>
   </div>
   </div>
 
   <br />
+  <div class="divider"></div>
   <br />
 	
 	<div class="row">
