@@ -16,6 +16,7 @@
 	$restauranta = Restaurant::find_by_id($_GET['restaurant_id']);
 	$available_tables = Table::find_available_by_restaurant_id($restauranta->restaurant_id);
 	$table = Table::find_by_restaurant_id($restauranta->restaurant_id);
+	$logo = Logo::find_by_restaurant_id($restauranta->restaurant_id);
 
 	// $if = $reservation->check_time($restauranta->restaurant_id);
 	$reservations = Reservation::find_by_sql("SELECT * FROM reservation WHERE restaurant_id = {$restauranta->restaurant_id} ");
@@ -71,11 +72,11 @@
 
 <?php include("layouts/header/header_menu.php"); ?>
 	<div class="row">
-			<div class="col s12 m8 offset-m2 restaurant-card">
+			<div class="col s12 m6 offset-m3 restaurant-card">
 				<?php echo display_message_errors($session_user->message_user); ?>  
 			  <div class="card horizontal">
 			    <div class="card-image responsive-img" style="height: auto;">
-			      <img src="" class="card-image" alt="restaurant's logo">
+			      <img src="logo/<?php echo $logo->filename; ?>" class="card-image" alt="restaurant's logo">
 			    </div>
 			    <div class="card-stacked">
 			      <div class="card-content">
