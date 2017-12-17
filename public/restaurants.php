@@ -6,13 +6,13 @@
 	// Total amount of restaurant
 	$total_count = Restaurant::count_all();
 	// Amount of restaurants per page
-	$per_page = 10;
+	$per_page = 50;
 
 	$pagination = new Pagination($page, $per_page, $total_count);
 
 	//just find records for this page
 
-	$sql = "SELECT * FROM restaurants ";
+	$sql = "SELECT * FROM restaurants WHERE existing = 'yes' ";
 	$sql .= "LIMIT {$per_page} ";
 	$sql .= "OFFSET {$pagination->offset()} ";
 
@@ -28,13 +28,15 @@
 			<div class="cities filter-name">
 			<h1 class="filter-title">Cities</h1>
 				<ul>
-					<li>Kielce</li>
-				</ul>
-			</div>
-			<div class="type filter-name">
-				<h2 class="filter-title"> Type</h2>
-				<ul>
-					<li>Chinese</li>
+					<?php 
+					// Getting cities from database from restaurants
+					$cities = Restaurant::get_cities();
+					foreach( $cities as $city ){
+				?>
+						<li><a href="sorted_restaurants.php?city=<?php echo $city['city']; ?>"><?php echo htmlspecialchars(ucfirst($city['city'])); ?></a></li>
+				<?php
+					}
+				?>
 				</ul>
 			</div>
 	</div>
@@ -45,12 +47,12 @@
 		  <div class="col s12 m8 offset-m3 restaurant-card">
 		    <div class="card horizontal">
 		      <div class="card-image responsive-img" style="height: auto;">
-		        <img src="logo/<?php echo $logo->filename; ?>" class="card-image">
+		        <img src="logo/<?php echo $logo->filename; ?>" class="card-image" alt="logo">
 		      </div>
 		      <div class="card-stacked">
 		        <div class="card-content">
-		        	<p class="center-align teal-text darken-2 card-title"><a href="chosen_restaurant.php?restaurant_id=<?php echo $restaurant->restaurant_id; ?>"><?php echo $restaurant->name; ?></a></p>
-		          <p class="card-caption"><?php echo $restaurant->caption != "" ? $restaurant->caption : "No description so far."; ?></p>
+		        	<p class="center-align teal-text darken-2 card-title"><a href="chosen_restaurant.php?restaurant_id=<?php echo htmlspecialchars($restaurant->restaurant_id); ?>"><?php echo htmlspecialchars($restaurant->name); ?></a></p>
+		          <p class="card-caption"><?php echo $restaurant->caption != "" ? htmlspecialchars($restaurant->caption) : "No description so far."; ?></p>
 		        </div>
 		        <p class="left-align card-address teal-text darken-2"><?php echo "{$restaurant->city}, {$restaurant->street} {$restaurant->number}"; ?></p>
 		      </div>
