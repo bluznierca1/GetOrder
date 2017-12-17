@@ -65,6 +65,7 @@
 					<input type="submit" id="old_password" name="submit" class="waves-effect waves-light btn" value="Submit">
 				</div>
 			</form>
+			</div>
 	</div>
 
 
