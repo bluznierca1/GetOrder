@@ -44,7 +44,7 @@
 	<header>
 		<div class="row">
 			<div class="col s12 center-align">
-				<h1><span class="teal-text darken-1">Login User Panel</span></h1>
+				<h1 class="teal-text text-darken-2 font-h1">Login User Panel</h1>
 			</span>
 		</span>
 	</header>
