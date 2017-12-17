@@ -41,6 +41,7 @@
 		$restaurant->name = trim($_POST['name']);
 		$restaurant->email = trim($_POST['email']);
 		$restaurant->marked = "no";
+		$restaurant->existing = "yes";
 
 		if( empty($errors) ){
 			if( !$restaurant->username_exists($restaurant->username) ) {
