@@ -71,5 +71,6 @@ require_once("../../includes/initialize.php");
 			<input type="submit" name="kidding" value="No, just kidding." class="waves-effect waves-light btn">
 		</form>
    	</div>
+   </div>
 
 <?php include("../layouts/footer/user_footer.php"); ?>
