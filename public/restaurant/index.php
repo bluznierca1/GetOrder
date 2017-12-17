@@ -16,7 +16,24 @@ require_once("../../includes/initialize.php");
 	$available_tables = Table::find_available_by_restaurant_id($restaurant->restaurant_id);
 	$logo = Logo::find_by_restaurant_id($restaurant->restaurant_id);
 
-	// Submiting tables
+	// Submitting booking table by restaurant
+	if( isset($_POST['submit_add_booked_table']) ){
+		$holder = $_POST['table'];
+		if( $table->minus_one_available($holder, $restaurant->restaurant_id) ){
+			$session_restaurant->message("Your tables are updated. Remember to unbook that tables!");
+			redirect_to("index.php");
+		}
+	}
+	// submitting unbooking tables by restaurant 
+	if( isset($_POST['submit_unbooked_table']) ){
+		$holder = $_POST['table'];
+		if( $table->add_one_available($holder, $restaurant->restaurant_id, null) ){
+			$session_restaurant->message("Your tables are updated.");
+			redirect_to("index.php");
+		}
+	}
+
+	// Submiting total amount of tables
 	if( isset($_POST['submit_tables']) ){
 		$one_seat = $database->escape_value($_POST['one_seat']);
 		$two_seats = $database->escape_value($_POST['two_seats']);
@@ -28,11 +45,13 @@ require_once("../../includes/initialize.php");
 
 		if( !isset($available_tables->restaurant_id) ){
 			if( Table::insert_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
-				if( $table->add_available_tables() ){
+				if( Table::add_available_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
 					$session_restaurant->message("Your tables are updated.");
+					redirect_to("index.php");
 				}
 			} else {
 				$session_restaurant->message("Something went wrong.");
+				redirect_to("index.php");
 			}
 		} else {
 			if( Table::edit_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant->restaurant_id) ){
@@ -84,7 +103,7 @@ require_once("../../includes/initialize.php");
 	}
 	
 ?>
-
+<?php echo isset($holder) ? $holder : ""; ?>
 <?php include("../layouts/header/restaurant_header_menu.php"); ?>
 
 	<div class="row">
@@ -140,6 +159,7 @@ require_once("../../includes/initialize.php");
 
 	<div class="row">
 		<div class="col s12 m8 offset-m2">
+		<!-- displaying all of the available tables  -->
 		<h2 class="teal-text darken-2 center-align" style="font-size: 2em">Available Tables</h2>
 	<table class="centered striped">
         <thead>
@@ -168,9 +188,65 @@ require_once("../../includes/initialize.php");
   </div>
 
   <div class="row">
+		<div class="col s8 offset-s2 s6">
+		<!-- buttons that are opening menus for updating available tables -->
+		<div class="col s6 center-align" style="padding: 1em 0 1em 0;">
+			<button id="edit-available-tables-button" class="btn orange darken-2">Click me to Book Table</button>
+		</div>
+		<div class="col s6 center-align" style="padding: 1em 0 1em 0;">
+				<button id="edit-available-tables-unbook-button" class="btn orange darken-2">Click me to Unbook Table</button>
+			</div>
+		<div class="edit-available-tables-form-hidden" id="edit-available-tables-container">
+			<form action="index.php" method="post">
+				<!-- locked options are when there are 0 available seats -->
+				<div class="input-field col s12 m8 offset-m2">
+			    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">Choose table</p>
+			    <select name="table">
+						<option value="1" <?php echo $available_tables->one_seat < 1 ? 'disabled' : "" ?> >1 seat table</option>
+						<option value="2" <?php echo $available_tables->two_seats < 1 ? 'disabled' : "" ?> >2 seats table</option>
+						<option value="3" <?php echo $available_tables->three_seats < 1 ? 'disabled' : "" ?> >3 seats table</option>
+						<option value="4" <?php echo $available_tables->four_seats < 1 ? 'disabled' : "" ?> >4 seats table</option>
+						<option value="5" <?php echo $available_tables->five_seats < 1 ? 'disabled' : "" ?> >5 seats table</option>
+						<option value="6" <?php echo $available_tables->six_seats < 1 ? 'disabled' : "" ?> >6 seats table</option>
+			    </select>
+			  </div>
+
+			  <div class="input-field col s12 center-align">
+					<input type="submit" name="submit_add_booked_table" id="submit_book_table" class="btn" value="Add booked table">
+			  </div>
+		  </form>
+	  </div>
+			
+			<!-- Here are locked options when amount of available seats is equal to the total amount of tables  -->
+			<div class="edit-available-tables-unbook-form-hidden" id="edit-available-tables-unbook-container">
+				<form action="index.php" method="post">
+					<div class="input-field col s12 m8 offset-m2">
+				    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">Choose table</p>
+				    <select name="table">
+							<option value="1" <?php echo $available_tables->one_seat >= $table->one_seat ? 'disabled' : "" ?> >1 seat table</option>
+							<option value="2" <?php echo $available_tables->two_seats >= $table->two_seats ? 'disabled' : "" ?> >2 seats table</option>
+							<option value="3" <?php echo $available_tables->three_seats >= $table->three_seats ? 'disabled' : "" ?> >3 seats table</option>
+							<option value="4" <?php echo $available_tables->four_seats >= $table->four_seats ? 'disabled' : "" ?> >4 seats table</option>
+							<option value="5" <?php echo $available_tables->five_seats >= $table->five_seats ? 'disabled' : "" ?> >5 seats table</option>
+							<option value="6" <?php echo $available_tables->six_seats >= $table->six_seats ? 'disabled' : "" ?> >6 seats table</option>
+				    </select>
+				  </div>
+
+					<div class="input-field col s12 center-align">
+						<input type="submit" name="submit_unbooked_table" id="submit_book_table" class="btn" value="Unbook table">
+					</div>
+			  </form>
+	  	</div>
+	  </div>
+  </div>
+
+
+
+  <div class="row">
 		<div class="col s12 m8 offset-m2">
-		<h3 class="teal-text darken-2 center-align" style="font-size: 2em">Tables</h3>
-	<table class="centered striped">
+			<!-- displaying all of the tables in general -->
+			<h3 class="teal-text darken-2 center-align" style="font-size: 2em">Tables</h3>
+			<table class="centered striped">
         <thead>
           <tr>
               <th>1 seat table</th>
@@ -198,12 +274,12 @@ require_once("../../includes/initialize.php");
 	
 	<br />
 	<br />
-
+	
 	<div class="row">
 		<div class="col s8 offset-s2 s6">
-		
+		<!-- panel for editing total amount of tables in restaurant  -->
 		<div class="col s12 center-align" style="padding: 1em 0 1em 0;">
-			<button id="edit-tables-button" class="btn">Click me to Edit tables</button>
+			<button id="edit-tables-button" class="btn orange darken-2">Click me to Edit tables</button>
 		</div>
 		<div class="edit-tables-form-hidden" id="edit-tables-container">
 		<form action="index.php" method="post">
@@ -212,7 +288,13 @@ require_once("../../includes/initialize.php");
 	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">1 seat table</p>
 	    <select name="one_seat">
 	      <?php for( $a = 0; $a <= 6; $a++) { ?>
-	      <option value="<?php echo $a; ?>" <?php echo $table->one_seat == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <option value="<?php echo $a; ?>" 
+	      	<?php 
+	      	//checking if there are already added tables for that restaurant
+	      		if( isset($table->one_seat) ) {
+	      			// if added - adding selected property for option HTML
+	      			echo $table->one_seat == $a ? "selected" : "";
+	      		} ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
 	      <?php } ?>
 	    </select>
 	  </div>
@@ -221,7 +303,13 @@ require_once("../../includes/initialize.php");
 	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">2 seats table</p>
 	    <select name="two_seats">
 	      <?php for( $a = 0; $a <= 6; $a++) { ?>
-	      <option value="<?php echo $a; ?>" <?php echo $table->two_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <option value="<?php echo $a; ?>" 
+	      <?php 
+	      	//checking if there are already added tables for that restaurant
+	      		if( isset($table->two_seats) ) {
+	      			// if added - adding selected property for option HTML
+	      			echo $table->two_seats == $a ? "selected" : "";
+	      		} ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
 	      <?php } ?>
 	    </select>
 	  </div>
@@ -230,7 +318,13 @@ require_once("../../includes/initialize.php");
 	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">3 seats table</p>
 	    <select name="three_seats">
 	      <?php for( $a = 0; $a <= 6; $a++) { ?>
-	      <option value="<?php echo $a; ?>" <?php echo $table->three_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <option value="<?php echo $a; ?>" 
+	      <?php 
+	      	//checking if there are already added tables for that restaurant
+	      		if( isset($table->three_seats) ) {
+	      			// if added - adding selected property for option HTML
+	      			echo $table->three_seats == $a ? "selected" : "";
+	      		} ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
 	      <?php } ?>
 	    </select>
 	  </div>
@@ -239,7 +333,13 @@ require_once("../../includes/initialize.php");
 	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">4 seats table</p>
 	    <select name="four_seats">
 	      <?php for( $a = 0; $a <= 6; $a++) { ?>
-	      <option value="<?php echo $a; ?>" <?php echo $table->four_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <option value="<?php echo $a; ?>"
+	      <?php 
+	      	//checking if there are already added tables for that restaurant
+	      		if( isset($table->four_seats) ) {
+	      			// if added - adding selected property for option HTML
+	      			echo $table->four_seats == $a ? "selected" : "";
+	      		} ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
 	      <?php } ?>
 	    </select>
 	  </div>
@@ -248,7 +348,13 @@ require_once("../../includes/initialize.php");
 	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">5 seats table</p>
 	    <select name="five_seats">
 	      <?php for( $a = 0; $a <= 6; $a++) { ?>
-	      <option value="<?php echo $a; ?>" <?php echo $table->five_seats == $a ? "selected" : "" ?>><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <option value="<?php echo $a; ?>"
+	      <?php 
+	      	//checking if there are already added tables for that restaurant
+	      		if( isset($table->five_seats) ) {
+	      			// if added - adding selected property for option HTML
+	      			echo $table->five_seats == $a ? "selected" : "";
+	      		} ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
 	      <?php } ?>
 	    </select>
 	  </div>
@@ -257,7 +363,12 @@ require_once("../../includes/initialize.php");
 	    <p class="teal-text darken-2 center-align" style="font-size: 1.3em;">6 seats table</p>
 	    <select name="six_seats">
 	      <?php for( $a = 0; $a <= 6; $a++) { ?>
-	      <option value="<?php echo $a; ?>" <?php echo $table->six_seats == $a ? "selected" : "" ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
+	      <option value="<?php echo $a; ?>"<?php 
+	      	//checking if there are already added tables for that restaurant
+	      		if( isset($table->six_seats) ) {
+	      			// if added - adding selected property for option HTML
+	      			echo $table->six_seats == $a ? "selected" : "";
+	      		} ?> ><?php echo $a != 1 ? "{$a} tables" : "{$a} table"; ?> </option>
 	      <?php } ?>
 	    </select>
 	  </div>
@@ -273,7 +384,7 @@ require_once("../../includes/initialize.php");
   <br />
   <div class="divider"></div>
   <br />
-	
+	<!-- panel for uploading/removing logo  -->
 	<!-- // Make it depended on if link to logo exists -->
 	<?php 
 		if( isset($logo->filename) ){
@@ -320,6 +431,7 @@ require_once("../../includes/initialize.php");
   <div class="divider"></div>
   <br />
 	
+	<!-- panel for adding caption -->
 	<div class="row">
 	  <form class="col s12" method="post" action="index.php">
 	    <div class="row">
