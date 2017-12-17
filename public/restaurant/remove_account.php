@@ -16,20 +16,22 @@ require_once("../../includes/initialize.php");
 		redirect_to("index.php");
 	}
 
-	if( isset($_POST['submit'] ) ){
-		if( $restaurant->delete($_GET['restaurant_id']) && $restaurant->unmark_restaurant($_GET['restaurant_id']) ){
-			$restaurant = Restaurant::find_by_id($_GET['restaurant_id']);
-			$session_restaurant->logout($restaurant);
-			redirect_to("../index.php");
-		}
-	}
-
 	$restaurant = Restaurant::find_by_id($_GET['restaurant_id']);
+
+	if( isset($_POST['submit'] ) ){
+		$table = Table::find_by_restaurant_id($restaurant->restaurant_id);
+		if( Restaurant::unmark_restaurant($restaurant->restaurant_id) ){
+			if( $restaurant->delete($restaurant->restaurant_id) ){
+				$session_restaurant->logout($restaurant);
+				redirect_to("../index.php");
+				}
+			} 
+		}
+
 	
 ?>
 
 <?php include("../layouts/header/restaurant_header_menu.php"); ?>
-
 	<div class="row">
 		<div class="col s12 center-align">
 			<h1 class="teal-text darken-2 restaurant-title">Are you leaving us, <?php echo $restaurant->name; ?>?</h2>
@@ -71,5 +73,6 @@ require_once("../../includes/initialize.php");
 			<input type="submit" name="kidding" value="No, just kidding." class="waves-effect waves-light btn">
 		</form>
    	</div>
+   </div>
 
 <?php include("../layouts/footer/restaurant_footer.php"); ?>
