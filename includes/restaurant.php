@@ -4,7 +4,7 @@
 
 	class Restaurant {
 
-		protected static $db_fields = ['username', 'password', 'name', 'city', 'street', 'number', 'zip_code', 'phone_number', 'created', 'email', 'marked', 'caption', 'open_from', 'open_to'];
+		protected static $db_fields = ['username', 'password', 'name', 'city', 'street', 'number', 'zip_code', 'phone_number', 'created', 'email', 'marked', 'caption', 'open_from', 'open_to', 'existing'];
 		protected static $table_name = "restaurants";
 		public $restaurant_id;
 		public $username;
@@ -21,6 +21,7 @@
 		public $caption;
 		public $open_from;
 		public $open_to;
+		public $existing;
 
 		public static function authenticate($username="", $password=""){
 				global $database;
@@ -109,6 +110,19 @@
 			return array_shift($row);
 		}
 
+		public static function find_by_city($city = ""){
+			global $database;
+			$array_result = [];
+			$sql = "SELECT * FROM " . self::$table_name . " ";
+			$sql .= "WHERE city = '{$city}' LIMIT 3";
+
+			$result = $database->query($sql);
+			while( $row = mysqli_fetch_assoc($result) ){
+				$result_array[] = $row;
+			}
+			return !empty($result_array) ? $result_array  : false;
+		}
+
 		public static function find_by_sql($sql = ""){
 			global $database;
 			$object_array = [];
@@ -120,7 +134,6 @@
 
 			return $object_array;
 		}
-
 
 		private static function instantiate($record){
 			$object = new self;
@@ -216,16 +229,18 @@
 			// return $sql;
 		}
 
-		public function delete($id = null){
+		public function delete($restaurant_id = null){
 			global $database;
-			$sql = "DELETE FROM " . self::$table_name ;
-			$sql .= " WHERE restaurant_id = {$id} LIMIT 1";
+			$sql = "UPDATE " . self::$table_name . " ";
+			$sql .= "SET existing = 'no', password = 'admin' ";
+			$sql .= "WHERE restaurant_id = {$restaurant_id} LIMIT 1";
 
 			if( $database->query($sql) ){
 				return true;
 			} else {
 				return false;
 			}
+			// return $sql;
 		}
 
 		public static function unmark_restaurant($restaurant_id = null){
@@ -240,6 +255,7 @@
 			} else {
 				return false;
 			}
+			// return $sql;
 		}
 
 		public static function edit($name="", $email="", $city="", $street="", $number=null, $phone_number=null, $restaurant_id=null){
@@ -290,6 +306,18 @@
 			} else {
 				return false;
 			}
+		}
+
+		public static function get_cities(){
+			global $database;
+			$result_array = [];
+			$sql = "SELECT DISTINCT city FROM " . self::$table_name;
+			$result = $database->query($sql);
+			while( $row = mysqli_fetch_assoc($result) ){
+				$result_array[] = $row;
+			}
+
+			return $result_array;
 		}
 
 		
