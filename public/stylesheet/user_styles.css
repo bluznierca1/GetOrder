@@ -94,48 +94,50 @@ span.buton-collapse-close {
 }
 
 /*button of choice*/
-.choice-h1{
-	font-size: 3.5em;
-}
+	.choice-h1{
+		font-size: 3.5em;
+	}
 
-.choice-general {
-	background-color: #e65100;
-	color: white;
-	padding: .2em 1em;
-	border-radius: 5px;
-}
-
-.choice-h2 {
-	font-size: 2em;
-}
-
-@media screen and ( max-width:480px ) {
-	.choice-h1 {
-		font-size: 2em;
+	.choice-general {
+		background-color: #e65100;
+		color: white;
+		padding: .2em 1em;
+		border-radius: 5px;
 	}
 
 	.choice-h2 {
-		font-size: 1.5em;
-	}
-}
-
-@media screen and ( min-width: 481px ) {
-	.choice-h1 {
-		font-size: 2.5em;
-	}
-	.choice-h2 {
 		font-size: 2em;
 	}
-}
 
-@media screen and ( min-width: 961px ) {
-	.choice-h1 {
-		font-size: 3,5em;
+	@media screen and ( max-width:480px ) {
+		.choice-h1 {
+			font-size: 2em;
+		}
+
+		.choice-h2 {
+			font-size: 1.5em;
+		}
 	}
-	.choice-h2 {
-		font-size: 2em;
+
+	@media screen and ( min-width: 481px ) {
+		.choice-h1 {
+			font-size: 2.5em;
+		}
+
+		.choice-h2 {
+			font-size: 1.6em;
+		}
 	}
-}
+
+	@media screen and ( min-width: 961px ) {
+		.choice-h1 {
+			font-size: 3,5em;
+		}
+
+		.choice-h2 {
+			font-size: 1.6em;
+		}
+	}
 
 /*index page*/
 .card-title-user {

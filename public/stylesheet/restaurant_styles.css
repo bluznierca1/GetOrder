@@ -101,7 +101,7 @@ span.buton-collapse-close {
 		}
 
 		.choice-h2 {
-			font-size: 2em;
+			font-size: 1.6em;
 		}
 	}
 
@@ -111,7 +111,7 @@ span.buton-collapse-close {
 		}
 
 		.choice-h2 {
-			font-size: 2em;
+			font-size: 1.6em;
 		}
 	}
 
@@ -133,6 +133,14 @@ span.buton-collapse-close {
 .file-input-title {
 	font-size: 2em;
 	height: 1em;
+}
+
+.edit-available-tables-form-hidden {
+	display: none;
+}
+
+.edit-available-tables-unbook-form-hidden {
+	display: none;
 }
 
 .edit-tables-form-hidden {
