@@ -117,18 +117,41 @@
 
 		}
 
-		public function add_available_tables(){
+		public static function remove_table($restaurant_id){
 			global $database;
-			$attributes = $this->sanitized_attributes();
 
+			$query = "DELETE FROM available_tables ";
+			$query .= "WHERE restaurant_id = {$restaurant_id}' LIMIT 1 ";
+			if ($database->query($query) ){
+				$sql1 = "DELETE FROM display_reservations	";
+				$sql1 .= "WHERE restaurant_id = {$restaurant_id} LIMIT 1";
+				if( $database->query($sql1) ){
+					// sql for removing from tables table
+					$sql = "DELETE FROM " . self::$table_name . " ";
+					$sql .= "WHERE restaurant_id = {$restaurant_id}";
+					if ($database->query($sql) ){
+					return true;
+				} else {
+					return false;
+				}
+
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+
+		public static function add_available_tables($one_seat, $two_seats, $three_seats, $four_seats, $five_seats, $six_seats, $restaurant_id){
+			global $database;
+			
 			$sql = "INSERT INTO available_tables (";
-			$sql .= join(", ", array_keys($attributes) );
-			$sql .= ") VALUES ('";
-			$sql .= join("', '", array_values($attributes));
-			$sql .= "') ";
+			$sql .= "one_seat, two_seats, three_seats, four_seats, five_seats, six_seats, restaurant_id";
+			$sql .= ") VALUES ( ";
+			$sql .= "'{$one_seat}', '{$two_seats}', '{$three_seats}', '{$four_seats}', '{$five_seats}', '{$six_seats}', '{$restaurant_id}' )";
 
 			if( $database->query($sql) ) {
-				$this->id = $database->insert_id();
 				return true;
 			} else {
 				return false;
@@ -234,7 +257,7 @@
 			}	
 		}
 
-		public function add_one_available($seat, $restaurant_id, $reservation_id){
+		public function add_one_available($seat = null, $restaurant_id = null, $reservation_id = null){
 			global $database;
 			$holder = "";
 			switch( $seat ){
