@@ -30,4 +30,20 @@ $(document).ready(function(){
 	 	}
 	 	
 	 });
+	 $('#edit-available-tables-button').click(function() {
+	 	if( $('#edit-available-tables-container').hasClass('edit-available-tables-form-hidden') ){
+	 		$('#edit-available-tables-container').removeClass('edit-available-tables-form-hidden');	
+	 	} else {
+	 		$('#edit-available-tables-container').addClass('edit-available-tables-form-hidden');
+	 	}
+	 	
+	 });
+	 $('#edit-available-tables-unbook-button').click(function() {
+	 	if( $('#edit-available-tables-unbook-container').hasClass('edit-available-tables-unbook-form-hidden') ){
+	 		$('#edit-available-tables-unbook-container').removeClass('edit-available-tables-unbook-form-hidden');	
+	 	} else {
+	 		$('#edit-available-tables-unbook-container').addClass('edit-available-tables-unbook-form-hidden');
+	 	}
+	 	
+	 });
 });
