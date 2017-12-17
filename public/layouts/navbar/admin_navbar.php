@@ -13,7 +13,7 @@
 		</li>
 		<li>
 			<div class="restaurant-view center-align">	
-				<h4 class="restaurant-navbar-title teal-text darken-1"><?php echo $admin->username; ?></h4>
+				<h4 class="restaurant-navbar-title teal-text darken-1 font-h3"><?php echo $admin->username; ?></h4>
 			</div>
 		</li>
 		<li><a href="index.php"><i class="material-icons">group</i>My Account</a></li>

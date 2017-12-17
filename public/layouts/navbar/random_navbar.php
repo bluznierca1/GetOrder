@@ -13,7 +13,7 @@
 		</li>
 		<li>
 			<div class="restaurant-view center-align">	
-				<h4 class="restaurant-navbar-title teal-text darken-1">Menu</h4>
+				<h4 class="restaurant-navbar-title teal-text darken-1 font-h3">Menu</h4>
 			</div>
 		</li>
 		<li><a href="user/login.php"><i class="material-icons">assignment_ind</i>Login as User</a></li>

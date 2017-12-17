@@ -13,12 +13,12 @@
 		</li>
 		<li>
 			<div class="restaurant-view center-align">	
-				<h4 class="restaurant-navbar-title teal-text darken-1"><?php echo $restaurant->name; ?></h4>
+				<h4 class="restaurant-navbar-title teal-text darken-1 font-h3"><?php echo $restaurant->name; ?></h4>
 			</div>
 		</li>
 		<li><a href="index.php"><i class="material-icons">person</i>My account</a></li>
 		<li><div class="divider"></div></li>
-		<li><a href="edit_account.php"><i class="material-icons">mode_edit</i>Account</a></li>
+		<li><a href="edit_account.php"><i class="material-icons">mode_edit</i>Edit Account</a></li>
 		<li><div class="divider"></div></li>
 		<li><a href="change_password.php"><i class="material-icons">mode_edit</i>Password</a></li>
 		<li><div class="divider"></div></li>
